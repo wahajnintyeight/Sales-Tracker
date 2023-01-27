@@ -32,7 +32,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="mobile-menu md:hidden">
         <div class="mobile-menu-bar">
             <a href="" class="flex mr-auto">
-                <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
+                <img alt="Rubick Tailwind HTML Admin Template" class="w-6"
+                    src="{{ asset('dashboard-dist/dist/images/logo.svg') }}">
             </a>
             <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2"
                     class="w-8 h-8 text-white transform -rotate-90"></i> </a>
@@ -41,7 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <li>
                 <a href="javascript:;.html" class="menu menu--active">
                     <div class="menu__icon"> <i data-feather="home"></i> </div>
-                    <div class="menu__title"> Dashboard <i data-feather="chevron-down"
+                    <div class="menu__title"> Overview <i data-feather="chevron-down"
                             class="menu__sub-icon transform rotate-180"></i> </div>
                 </a>
                 <ul class="menu__sub-open">
@@ -52,7 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </li>
                     <li>
-                        <a href="side-menu-light-dashboard-overview-2.html" class="menu menu--active">
+                        <a href="{{ route('admin.dashboard') }}" class="menu menu--active">
                             <div class="menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="menu__title"> Overview 2 </div>
                         </a>
@@ -65,55 +66,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;" class="menu">
-                    <div class="menu__icon"> <i data-feather="box"></i> </div>
-                    <div class="menu__title"> Menu Layout <i data-feather="chevron-down" class="menu__sub-icon "></i>
-                    </div>
-                </a>
-                <ul class="">
-                    <li>
-                        <a href="index.html" class="menu">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> Side Menu </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="simple-menu-light-dashboard-overview-1.html" class="menu">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> Simple Menu </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="top-menu-light-dashboard-overview-1.html" class="menu">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> Top Menu </div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
             <li class="menu__devider my-6"></li>
-            <li>
-                <a href="javascript:;" class="menu">
-                    <div class="menu__icon"> <i data-feather="edit"></i> </div>
-                    <div class="menu__title"> Crud <i data-feather="chevron-down" class="menu__sub-icon "></i> </div>
-                </a>
-                <ul class="">
-                    <li>
-                        <a href="side-menu-light-crud-data-list.html" class="menu">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> Data List </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="side-menu-light-crud-form.html" class="menu">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> Form </div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
         </ul>
     </div>
@@ -122,244 +76,33 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="" class="intro-x flex items-center pl-5 pt-4">
-                <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
-                <span class="hidden xl:block text-white text-lg ml-3"> Rubick </span>
+                <i style="color: white" data-feather="bar-chart"></i>
+                <span class="hidden xl:block text-white text-lg ml-3"> Sales Tracker </span>
             </a>
             <div class="side-nav__devider my-6"></div>
             <ul>
                 <li>
-                    <a href="side-menu-light-inbox.html" class="side-menu">
+                    <a href="{{ route('admin.dashboard') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
-                        <div class="side-menu__title"> Dashboard </div>
+                        <div class="side-menu__title"> Overview </div>
                     </a>
                 </li>
+
                 <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                        <div class="side-menu__title">
-                            Menu Layout
-                            <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="index.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Side Menu </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="simple-menu-light-dashboard-overview-1.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Simple Menu </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="top-menu-light-dashboard-overview-1.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Top Menu </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="side-menu-light-inbox.html" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
-                        <div class="side-menu__title"> Inbox </div>
+                    <a href="{{route('admin.teams')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                        <div class="side-menu__title"> Teams </div>
                     </a>
                 </li>
 
                 <li class="side-nav__devider my-6"></li>
                 <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="edit"></i> </div>
+                    <a href="{{ route('admin.users') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="user"></i> </div>
                         <div class="side-menu__title">
-                            Crud
-                            <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
+                            Users
                         </div>
                     </a>
-                    <ul class="">
-                        <li>
-                            <a href="side-menu-light-crud-data-list.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Data List </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="layout"></i> </div>
-                        <div class="side-menu__title">
-                            Pages
-                            <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="javascript:;" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title">
-                                    Wizards
-                                    <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                                </div>
-                            </a>
-                            <ul class="">
-                                <li>
-                                    <a href="side-menu-light-wizard-layout-1.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 1</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-wizard-layout-2.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 2</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-wizard-layout-3.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 3</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title">
-                                    Blog
-                                    <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                                </div>
-                            </a>
-                            <ul class="">
-                                <li>
-                                    <a href="side-menu-light-blog-layout-1.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 1</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-blog-layout-2.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 2</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-blog-layout-3.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 3</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title">
-                                    Pricing
-                                    <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                                </div>
-                            </a>
-                            <ul class="">
-                                <li>
-                                    <a href="side-menu-light-pricing-layout-1.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 1</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-pricing-layout-2.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 2</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title">
-                                    Invoice
-                                    <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                                </div>
-                            </a>
-                            <ul class="">
-                                <li>
-                                    <a href="side-menu-light-invoice-layout-1.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 1</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-invoice-layout-2.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 2</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title">
-                                    FAQ
-                                    <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
-                                </div>
-                            </a>
-                            <ul class="">
-                                <li>
-                                    <a href="side-menu-light-faq-layout-1.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 1</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-faq-layout-2.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 2</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="side-menu-light-faq-layout-3.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-feather="zap"></i> </div>
-                                        <div class="side-menu__title">Layout 3</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="login-light-login.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Login </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="login-light-register.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Register </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="main-light-error-page.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Error Page </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="side-menu-light-update-profile.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Update profile </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="side-menu-light-change-password.html" class="side-menu">
-                                <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                                <div class="side-menu__title"> Change Password </div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>

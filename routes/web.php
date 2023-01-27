@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('/dashboard', [AdminController::class, 'viewHome'])->name('dashboard');
     Route::get('/', [AdminController::class, 'viewMain'])->name('view-home');
+    Route::get('/users', [AdminController::class, 'viewUsers'])->name('users');
+    // Teams
+    Route::get('/teams', [AdminController::class, 'viewTeams'])->name('teams');
+    Route::post('/teams/add', [TeamController::class, 'store'])->name('teams.add');
+    Route::post('/team/assign', [AdminController::class, 'addUserToTeam'])->name('teams.assign.user');
 });
 
 // Route::middleware('auth')->group(function () {

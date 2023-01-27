@@ -17,7 +17,8 @@
             <div class="container m-auto px-6 md:px-12 lg:px-6">
                 <div class="flex flex-wrap items-center justify-between py-6 md:py-4 md:gap-0">
                     <div class="w-full flex items-center justify-between lg:w-auto">
-                        <a href="{{ route('/') }}" aria-label="logo" class="font-bold text-white font-lg">
+                        <a href="{{ route('/') }}" aria-label="logo" class="font-bold text-white font-lg"
+                            style="font-size: 25px">
                             Sales Tracker
                         </a>
 
@@ -35,35 +36,25 @@
                         class="flex h-0 lg:h-auto overflow-hidden lg:flex lg:pt-0 w-full md:space-y-0 lh:p-0 md:bg-transparent lg:w-auto transition-all duration-300">
                         <div id="navBox"
                             class="w-full p-6 lg:p-0 bg-white bg-opacity-40 backdrop-blur-md lg:items-center flex flex-col lg:flex-row lg:bg-transparent transition-all ease-in">
-                            <ul
-                                class="space-y-6 pb-6 tracking-wide font-medium text-gray-800 lg:text-gray-100 lg:pb-0 lg:pr-6 lg:items-center lg:flex lg:space-y-0">
-                                <li>
-                                    <a href="#" class="block md:px-3">
-                                        <span>Product</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block md:px-3">
-                                        <span>Use Cases</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block md:px-3">
-                                        <span>Integrations</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block md:px-3">
-                                        <span>Pricing</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block md:px-3">
-                                        <span>Blog</span>
-                                    </a>
-                                </li>
-                            </ul>
+
                             @if (Auth::user())
+                                <ul
+                                    class="space-y-6 pb-6 tracking-wide font-medium text-gray-800 lg:text-gray-100 lg:pb-0 lg:pr-6 lg:items-center lg:flex lg:space-y-0">
+                                    @if (Auth::user()->role_id == 1)
+                                        <li>
+                                            <a href="{{ route('admin.dashboard') }}" class="block md:px-3">
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a href="{{ route('user.dashboard') }}" class="block md:px-3">
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+
                                 Hello, {{ Auth::user()->name }}
                                 <form action="{{ route('logout') }}" class="block md:px-3" method="post">
                                     @csrf
