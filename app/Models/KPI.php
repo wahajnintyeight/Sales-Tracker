@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class KPI extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+    ];
+    public function organizationGoal()
+    {
+        return $this->hasMany(OrganizationGoal::class);
+    }
 }

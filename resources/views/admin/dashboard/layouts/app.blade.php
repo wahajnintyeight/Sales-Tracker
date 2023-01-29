@@ -130,7 +130,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script>
         $(document).ready(function() {
-            console.log("HI");
+           
             $('#myTable').DataTable({
                 paging: false,
                 "bInfo": false

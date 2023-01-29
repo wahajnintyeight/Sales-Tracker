@@ -31,6 +31,10 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     // Dashboard
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');
     Route::get('/teams', [UserController::class, 'viewTeam'])->name('team');
+    Route::get('/activities', [UserController::class, 'viewActivities'])->name('activities');
+
+    Route::post('/activities/add', [UserController::class, 'addEntry'])->name('entry.add');
+
 });
 
 

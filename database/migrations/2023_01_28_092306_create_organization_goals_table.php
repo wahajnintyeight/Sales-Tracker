@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->longText("description");
             $table->integer("incentive");
             $table->date("deadline");
-            $table->integer("kpi_id");
+            $table->integer("k_p_i_id");
             $table->integer("calls");
             $table->integer("pitches");
             $table->timestamps();

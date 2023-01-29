@@ -99,6 +99,7 @@
                             </div>
                         </div>
                     </section>
+                    {{-- END --}}
                     <div id="input" class="p-3">
                         <div class="preview">
                             <div>

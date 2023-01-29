@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->integer("organization_goal_id");
             $table->integer("calls");
             $table->integer("user_id");
+            $table->date("performed_on");
             $table->integer("pitches");
             $table->timestamps();
         });

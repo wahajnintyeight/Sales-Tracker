@@ -46,4 +46,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('\App\Models\Team');
     }
+    public function entries()
+    {
+        return $this->hasMany(OrganizationEntry::class);
+    }
 }
