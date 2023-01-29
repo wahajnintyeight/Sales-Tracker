@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KPI;
+use App\Models\OrganizationGoal;
 use App\Models\Team;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,5 +39,27 @@ class AdminController extends Controller
         // $user[0]->team_id = $request->team_id;
         // $user->update();
         return redirect('admin/teams');
+    }
+    public function viewGoals()
+    {
+        $kpis = KPI::all();
+        $goals = OrganizationGoal::paginate(10);
+        return view('admin.dashboard.goals', compact('kpis', 'goals'));
+    }
+    public function addGoals(Request $request)
+    {
+        // dd($request);
+        $goals = new OrganizationGoal();
+        $goals->name = $request->title;
+        $date = Carbon::createFromFormat('d M, Y', $request->deadline)->format('Y-m-d');
+        $goals->deadline = $date;
+        $goals->created_by = $request->created_by;
+        $goals->description = $request->description;
+        $goals->kpi_id = $request->kpi_id;
+        $goals->calls = $request->calls;
+        $goals->pitches = $request->pitches;
+        $goals->incentive = $request->incentive;
+        $goals->save();
+        return redirect()->back();
     }
 }

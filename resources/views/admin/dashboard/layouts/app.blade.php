@@ -89,7 +89,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
 
                 <li>
-                    <a href="{{route('admin.teams')}}" class="side-menu">
+                    <a href="{{ route('admin.teams') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="users"></i> </div>
                         <div class="side-menu__title"> Teams </div>
                     </a>
@@ -104,6 +104,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.goals') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="user"></i> </div>
+                        <div class="side-menu__title">
+                            Goals
+                        </div>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- END: Side Menu -->
@@ -112,11 +120,23 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END: Content -->
     </div>
     <!-- BEGIN: JS Assets-->
+
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
     <script src="{{ asset('dashboard-dist/dist/js/app.js') }}"></script>
-    <!-- END: JS Assets-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log("HI");
+            $('#myTable').DataTable({
+                paging: false,
+                "bInfo": false
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,5 +1,7 @@
 @extends('admin.dashboard.layouts.app')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css" />
+
     <div class="content">
         @include('admin.dashboard.layouts.topbar')
         <div class="col-span-12 mt-6">
@@ -38,7 +40,7 @@
 
             </div>
             <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
-                <table class="table table-report sm:mt-2">
+                <table class="table table-report sm:mt-2" id="myTable">
                     <thead>
                         <tr>
                             <th class="whitespace-nowrap">#</th>
@@ -74,8 +76,11 @@
                                                 class="w-4 h-4 mr-1"></i> Edit </a>
                                         <a class="flex mr-3 text-danger" href=""> <i data-feather="trash-2"
                                                 class="w-4 h-4 mr-1"></i> Delete </a>
+                                        <a class="flex mr-3 text-warning" href="javascript:;" data-tw-toggle="modal"
+                                            data-tw-target="#team-modal-preview-{{ $key }}"> <i
+                                                data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a>
                                         <!-- BEGIN: Modal Toggle -->
-                                        
+
                                         {{-- <div id="header-footer-modal-preview{{ $key }}" class="modal"
                                             tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -156,7 +161,53 @@
                                         <!-- END: Modal Content -->
                                     </div>
                                 </td>
-                                
+                                <div id="team-modal-preview-{{ $key }}" class="modal" tabindex="-1"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('admin.teams.assign.user') }}" method="post">
+                                                @csrf
+                                                @method('POST')
+                                                <div class="modal-body">
+                                                    <div class="w-full"> <label for="modal-form-6"
+                                                            class="form-label font-bold">Add an
+                                                            Activity</label>
+
+                                                        {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
+                                                        <div>
+                                                            <div class="mt-2">
+                                                                Select Date:
+                                                                <div class="relative w-full mx-auto mt-2">
+                                                                    <div
+                                                                        class="absolute rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500 dark:bg-darkmode-700 dark:border-darkmode-800 dark:text-slate-400">
+                                                                        <i data-feather="calendar" class="w-4 h-4"></i>
+                                                                    </div> <input type="text"
+                                                                        class="datepicker form-control pl-12"
+                                                                        data-single-mode="true" name="activity_date">
+                                                                </div>
+                                                                <div class="relative w-full mx-auto mt-2">
+                                                                    <div> <label for="regular-form-1"
+                                                                            class="form-label">Select Title</label> <input
+                                                                            id="regular-form-1" type="text"
+                                                                            class="form-control" name="title">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- <select id="modal-form-6" class="form-select w-full" name="team_id"> --}}
+
+                                                        {{-- </select> --}}
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer"> <button type="button" data-tw-dismiss="modal"
+                                                        class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
+                                                    <input type="submit" class="btn btn-primary w-20" value="Add">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                         @endforeach
                     </tbody>

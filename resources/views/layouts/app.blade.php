@@ -36,48 +36,61 @@
                         class="flex h-0 lg:h-auto overflow-hidden lg:flex lg:pt-0 w-full md:space-y-0 lh:p-0 md:bg-transparent lg:w-auto transition-all duration-300">
                         <div id="navBox"
                             class="w-full p-6 lg:p-0 bg-white bg-opacity-40 backdrop-blur-md lg:items-center flex flex-col lg:flex-row lg:bg-transparent transition-all ease-in">
-
                             @if (Auth::user())
-                                <ul
-                                    class="space-y-6 pb-6 tracking-wide font-medium text-gray-800 lg:text-gray-100 lg:pb-0 lg:pr-6 lg:items-center lg:flex lg:space-y-0">
-                                    @if (Auth::user()->role_id == 1)
-                                        <li>
-                                            <a href="{{ route('admin.dashboard') }}" class="block md:px-3">
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
-                                    @else
-                                        <li>
-                                            <a href="{{ route('user.dashboard') }}" class="block md:px-3">
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
 
-                                Hello, {{ Auth::user()->name }}
-                                <form action="{{ route('logout') }}" class="block md:px-3" method="post">
-                                    @csrf
-                                    @method('POST')
-                                    <input type="submit" value="Log Out">
-                                </form>
+                                @if (Auth::user()->role_id == 0)
+                                    <ul
+                                        class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+                                        <li class="flex w-full lg:max-w-max justify-center">
+                                            <a href="{{ route('user.dashboard') }}"
+                                                class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                                <span
+                                                    class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                    Dashboard
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @elseif(Auth::user()->role_id == 1)
+                                    <ul
+                                        class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+                                        <li class="flex w-full lg:max-w-max justify-center">
+                                            <a href="{{ route('admin.dashboard') }}"
+                                                class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                                <span
+                                                    class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                    Dashboard
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @else
+                                    <ul
+                                        class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+
+
+                                        <li class="flex w-full lg:max-w-max justify-center">
+                                            <a href="{{ route('user-login-index') }}"
+                                                class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                                <span
+                                                    class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                    Sign In
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @endif
                             @else
                                 <ul
-                                    class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 lg:border-l flex flex-col lg:gap-0 lg:items-center lg:flex-row">
-                                    <li class="flex w-full lg:max-w-max justify-center">
-                                        <a href="{{ route('user-login-index') }}"
-                                            class="flex btn w-full py-3 px-6 rounded-md text-center transition border border-purple-600 bg-white bg-opacity-40 backdrop-blur-md lg:backdrop-blur-none lg:bg-opacity-0 lg:bg-transparent lg:border-transparent active:border-purple-400 justify-center max-w-lg lg:max-w-max">
-                                            <span class="block text-gray-700 lg:text-white font-semibold">
-                                                Login
-                                            </span>
-                                    </li>
+                                    class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+
 
                                     <li class="flex w-full lg:max-w-max justify-center">
-                                        <a href="{{ route('user-register-index') }}"
+                                        <a href="{{ route('user-login-index') }}"
                                             class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
                                             <span
                                                 class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
-                                                Sign Up
+                                                Sign In
                                             </span>
                                         </a>
                                     </li>

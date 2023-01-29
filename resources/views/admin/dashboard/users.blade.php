@@ -1,5 +1,6 @@
 @extends('admin.dashboard.layouts.app')
 @section('content')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css"/>
     <div class="content">
         @include('admin.dashboard.layouts.topbar')
         <div class="col-span-12 mt-6">
@@ -7,15 +8,10 @@
                 <h2 class="text-lg font-medium truncate mr-5">
                     Users List
                 </h2>
-                <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                    <button class="btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-feather="file-text"
-                            class="hidden sm:block w-4 h-4 mr-2"></i> Export to Excel </button>
-                    <button class="ml-3 btn box flex items-center text-slate-600 dark:text-slate-300"> <i
-                            data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to PDF </button>
-                </div>
+             
             </div>
             <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
-                <table class="table table-report sm:mt-2">
+                <table class="table table-report sm:mt-2" id="myTable">
                     <thead>
                         <tr>
                             <th class="whitespace-nowrap">#</th>
@@ -96,12 +92,20 @@
                                                             Team</label>
 
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                        <select id="modal-form-6" class="form-select w-full" name="team_id">
-                                                            @foreach ($teams as $team)
-                                                                <option value="{{ $team->id }}">{{ $team->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                        <div>
+                                                            <div class="mt-2"> <select
+                                                                    data-placeholder="Select your favorite actors"
+                                                                    class="tom-select w-full" name="team_id">
+                                                                    @foreach ($teams as $team)
+                                                                        <option value="{{ $team->id }}">
+                                                                            {{ $team->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select> </div>
+                                                        </div>
+                                                        {{-- <select id="modal-form-6" class="form-select w-full" name="team_id"> --}}
+
+                                                        {{-- </select> --}}
 
                                                     </div>
                                                 </div>
@@ -124,13 +128,11 @@
                         {{ $users->links() }}
                     </ul>
                 </nav>
-                {{-- <select class="w-20 form-select box mt-3 sm:mt-0">
-                    <option>10</option>
-                    <option>25</option>
-                    <option>35</option>
-                    <option>50</option>
-                </select> --}}
             </div>
         </div>
     </div>
+    {{-- <script src="{{ asset('dashboard-dist/dist/js/datatable.min.js') }}" type="text/javascript"></script> --}}
+    {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script> --}}
+
+  
 @endsection

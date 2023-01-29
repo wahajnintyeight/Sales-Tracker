@@ -28,11 +28,9 @@ Route::post('/user/register', [RegisteredUserController::class, 'store'])->name(
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'user'], 'as' => 'user.'], function () {
-    Route::get('/home', [UserController::class, 'viewHome'])->name('home');
-    // Contract
     // Dashboard
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');
-
+    Route::get('/teams', [UserController::class, 'viewTeam'])->name('team');
 });
 
 
@@ -45,6 +43,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/teams', [AdminController::class, 'viewTeams'])->name('teams');
     Route::post('/teams/add', [TeamController::class, 'store'])->name('teams.add');
     Route::post('/team/assign', [AdminController::class, 'addUserToTeam'])->name('teams.assign.user');
+    Route::get('/goals', [AdminController::class, 'viewGoals'])->name('goals');
+    Route::post('/goals/add', [AdminController::class, 'addGoals'])->name('goals.add');
+
 });
 
 // Route::middleware('auth')->group(function () {
