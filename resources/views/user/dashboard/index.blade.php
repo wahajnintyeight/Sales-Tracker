@@ -222,18 +222,34 @@
             </div>
             {{-- End Cards - 2 --}}
         </div>
-        {{-- GAUGE --}}
+
+        {{-- DAILY AVERAGE ENTRIES GAUGE --}}
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12 lg:col-span-6 mt-8">
                 <div class="report-box zoom-in">
                     <div class="box p-2">
                         <canvas width=450 height=250 class="justify-center" id="canvas-preview"></canvas>
                         <div id="preview-textfield"></div>
+                        <span class="block mx-auto m-2 font-medium text-center p-2">Daily Average Entries</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- DAILY AVERAGE ENTRIES GAUGE END --}}
+
+            {{-- CALL GOAL GAUGE --}}
+            <div class="col-span-12 lg:col-span-6 mt-8">
+                <div class="report-box zoom-in">
+                    <div class="box p-2">
+                        <canvas width=450 height=250 class="justify-center" id="calls-gauge"></canvas>
+                        <div id="preview-textfield"></div>
+                        <span class="block mx-auto m-2 font-medium text-center p-2">Calls</span>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- GAUGE END --}}
+        {{-- CALL GOAL GAUGE END --}}
+
         <!-- END: General Report -->
         <!-- BEGIN: Sales Report -->
         <div class="col-span-12 lg:col-span-12 mt-8">
@@ -496,6 +512,11 @@
     </div>
     <style>
         #canvas-preview {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #calls-gauge {
             display: block;
             margin: 0 auto;
         }

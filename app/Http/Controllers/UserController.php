@@ -76,11 +76,14 @@ class UserController extends Controller
             $totalPitchesMadeMonth += $em->pitches;
         }
 
+        // (sum of entries made on each day of that month / count of entries made that month).
         $cards = [
             'entries' => $entries,
+            'avgEntries' => ($totalCallsMadeMonth + $totalPitchesMadeMonth) / count($entriesInMonth),
             'totalCallsMadeMonth' => $totalCallsMadeMonth,
             'totalPitchesMadeMonth' => $totalPitchesMadeMonth,
             'goals' => $organizationGoals,
+            'recentGoal' => $organizationGoals[count($organizationGoals) - 1],
             'totalCallsMade' => $totalCallsMade,
             'totalPitchesMade' => $totalPitchesMade
         ];

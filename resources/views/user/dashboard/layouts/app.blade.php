@@ -221,103 +221,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 "bInfo": false
             });
         });
-        var opts = {
-            angle: -0.01, // The span of the gauge arc
-            lineWidth: 0.20, // The line thickness
-            radiusScale: 1, // Relative radius
-            pointer: {
-                length: 0.35, // // Relative to gauge radius
-                strokeWidth: 0.035, // The thickness
-                color: '#000000' // Fill color
-            },
-            limitMax: false, // If false, max value increases automatically if value > maxValue
-            limitMin: false, // If true, the min value of the gauge will be fixed
-            colorStart: '#6F6EA0', // Colors
-            colorStop: '#C0C0DB', // just experiment with them
-            strokeColor: '#EEEEEE', // to see which ones work best for you
-            generateGradient: true,
-            highDpiSupport: true, // High resolution support
-            // renderTicks is Optional
-            renderTicks: {
-                divisions: 8,
-                divWidth: 1.1,
-                divLength: 1,
-                divColor: '#333a33',
-                subDivisions: 0,
-                subLength: 0.5,
-                subWidth: 0.6,
-                subColor: '#666666'
-            },
-            staticZones: [{
-                    strokeStyle: "#f03e3e",
-                    min: 0,
-                    max: 1
-                },
-                {
-                    strokeStyle: "#fa5f31",
-                    min: 1,
-                    max: 1.4
-                },
-                {
-                    strokeStyle: "#ff7d22",
-                    min: 1.4,
-                    max: 2
-                },
-                {
-                    strokeStyle: "#ff9a0f",
-                    min: 2,
-                    max: 2.6
-                },
-                {
-                    strokeStyle: "#ffb700",
-                    min: 2.6,
-                    max: 3.2
-                },
-                {
-                    strokeStyle: "#f1c200",
-                    min: 3.2,
-                    max: 3.8
-                },
-                {
-                    strokeStyle: "#e1cc00",
-                    min: 3.8,
-                    max: 4.4
-                },
-                {
-                    strokeStyle: "#d0d500",
-                    min: 4.4,
-                    max: 5
-                },
-                {
-                    strokeStyle: "#adce02",
-                    min: 5,
-                    max: 5.6
-                },
-                {
-                    strokeStyle: "#89c612",
-                    min: 5.6,
-                    max: 6.3
-                },
-                {
-                    strokeStyle: "#62bd20",
-                    min: 6.3,
-                    max: 7
-                },
-                {
-                    strokeStyle: "#30b32d",
-                    min: 7,
-                    max: 8
-                },
-            ]
-        };
-        var target = document.getElementById('canvas-preview'); // your canvas element
-        var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-        gauge.maxValue = 8; // set max gauge value
-        gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
-        gauge.animationSpeed = 32; // set animation speed (32 is default value)
-        gauge.set(6); // set actual value
     </script>
-    <!-- END: JS Assets-->
+    <script>
+        var calls = <?php echo json_encode($cardInfo['totalCallsMade']); ?>;
+        var recentGoal = <?php echo json_encode($cardInfo['recentGoal']); ?>;
+    </script>
+    <script src="{{ asset('dashboard-dist/dist/js/daily-average-entry-gauge.js') }}"></script>
+    <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
 </body>
 
 </html>
