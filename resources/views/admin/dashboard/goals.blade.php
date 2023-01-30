@@ -62,12 +62,12 @@
                             <div class="grid grid-cols-12 gap-2">
                                 <div class="col-span-6">
                                     <label for="regular-form-1" class="form-label">Select Calls</label>
-                                    <input type="text" class="form-control col-span-4" name="calls"
+                                    <input type="text" class="form-control col-span-4" name="org_calls"
                                         placeholder="Select Calls" aria-label="default input inline 1">
                                 </div>
                                 <div class="col-span-6">
                                     <label for="regular-form-1" class="form-label">Select Pitches</label>
-                                    <input type="text" class="form-control col-span-4" name="pitches"
+                                    <input type="text" class="form-control col-span-4" name="org_pitches"
                                         placeholder="Select Pitches" aria-label="default input inline 2">
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                     <a href="" class="font-medium whitespace-nowrap">{{ $goal->name }}</a>
                                 </td>
                                 <td class="w-10">
-                                    <a href="" class="font-medium whitespace-nowrap">{{ $goal->description }}</a>
+                                    <a href="" class="font-medium whitespace-nowrap">{{mb_strimwidth($goal->description, 0, 40, '...')  }}</a>
                                 </td>
                                 <td class="w-10">
                                     <a href="" class="font-medium whitespace-nowrap">{{ $goal->incentive }}</a>

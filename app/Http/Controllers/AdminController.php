@@ -55,9 +55,9 @@ class AdminController extends Controller
         $goals->deadline = $date;
         $goals->created_by = $request->created_by;
         $goals->description = $request->description;
-        $goals->kpi_id = $request->kpi_id;
-        $goals->calls = $request->calls;
-        $goals->pitches = $request->pitches;
+        $goals->k_p_i_id = $request->kpi_id;
+        $goals->calls = $request->org_calls;
+        $goals->pitches = $request->org_pitches;
         $goals->incentive = $request->incentive;
         $goals->save();
         return redirect()->back();

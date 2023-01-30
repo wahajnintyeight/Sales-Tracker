@@ -8,6 +8,7 @@ use App\Models\OrganizationGoal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -45,22 +46,45 @@ class UserController extends Controller
 
         $entries = collect();
 
-        $totalCallsMade = 0;
-        $totalPitchesMade = 0;
 
+
+        $totalCallsMadeMonth = 0;
+        $totalPitchesMadeMonth = 0;
+
+        $totalCallsMade = array(0);
+        $totalPitchesMade = array(0);
+        $index = 0;
         foreach ($organizationGoals as $goal) {
-            $entries = $entries->concat($goal->entries); //Fetch all entries for a goal
+            // $entries = $entries->concat(); //Fetch all entries for a goal
+
+            foreach ($goal->entries as $entry) { //fetch all calls made in entries
+
+                $totalCallsMade[$index] = $totalCallsMade[$index] + $entry->calls;
+                $totalPitchesMade[$index] = $totalPitchesMade[$index] + $entry->pitches;
+            }
+            $index = $index + 1;
         }
-        foreach ($entries as $entry) { //fetch all calls made in entries
-            $totalCallsMade = $totalCallsMade + $entry->calls;
-            $totalPitchesMade = $totalPitchesMade + $entry->pitches;
+
+        // Fetch month-based
+        $monthNum = Carbon::now()->month;
+        $yearNum = Carbon::now()->year;
+
+        $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->get();
+        // Fetch monthly data (current month)
+        foreach ($entriesInMonth as $em) {
+            $totalCallsMadeMonth += $em->calls;
+            $totalPitchesMadeMonth += $em->pitches;
         }
+
         $cards = [
             'entries' => $entries,
-            'goal' => $organizationGoals[count($organizationGoals) - 1],
+            'totalCallsMadeMonth' => $totalCallsMadeMonth,
+            'totalPitchesMadeMonth' => $totalPitchesMadeMonth,
+            'goals' => $organizationGoals,
             'totalCallsMade' => $totalCallsMade,
             'totalPitchesMade' => $totalPitchesMade
         ];
+        // dd($cards);
         return $cards;
         // dd($entries, $organizationGoals[count($organizationGoals) - 1], $totalCallsMade);
     }
