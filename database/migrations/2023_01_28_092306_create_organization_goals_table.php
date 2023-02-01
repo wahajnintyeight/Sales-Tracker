@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer("incentive");
             $table->date("goal_start_date");
             $table->date("deadline");
+            $table->integer("is_completed")->default(0);
             $table->integer("k_p_i_id");
             $table->integer("calls");
             $table->integer("pitches");

@@ -142,7 +142,8 @@
                                     <a href="" class="font-medium whitespace-nowrap">{{ $goal->name }}</a>
                                 </td>
                                 <td class="w-10">
-                                    <a href="" class="font-medium whitespace-nowrap">{{mb_strimwidth($goal->description, 0, 40, '...')  }}</a>
+                                    <a href=""
+                                        class="font-medium whitespace-nowrap">{{ mb_strimwidth($goal->description, 0, 40, '...') }}</a>
                                 </td>
                                 <td class="w-10">
                                     <a href="" class="font-medium whitespace-nowrap">{{ $goal->incentive }}</a>
@@ -164,11 +165,11 @@
                                 </td>
                                 <td class="table-report__action w-56">
                                     <div class="flex  items-center">
-                                        <a class="flex  mr-3" href=""> <i data-feather="check-square"
-                                                class="w-4 h-4 mr-1"></i> Edit </a>
-                                        <a class="flex mr-3 text-danger" href=""> <i data-feather="trash-2"
+                                        <a class="flex bg btn btn-warning  mr-3" href=""> <i
+                                                data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        <a class="flex mr-3 btn btn-danger" href=""> <i data-feather="trash-2"
                                                 class="w-4 h-4 mr-1"></i> Delete </a>
-                                        <a class="flex mr-3 text-warning" href="javascript:;" data-tw-toggle="modal"
+                                        <a class="flex mr-3 btn btn-primary" href="javascript:;" data-tw-toggle="modal"
                                             data-tw-target="#team-modal-preview-{{ $key }}"> <i
                                                 data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a>
 

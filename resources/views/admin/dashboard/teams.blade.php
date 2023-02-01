@@ -72,11 +72,11 @@
                                 </td>
                                 <td class="table-report__action w-56">
                                     <div class="flex  items-center">
-                                        <a class="flex  mr-3" href=""> <i data-feather="check-square"
+                                        <a class="flex  btn btn-primary mr-1" href=""> <i data-feather="check-square"
                                                 class="w-4 h-4 mr-1"></i> Edit </a>
-                                        <a class="flex mr-3 text-danger" href=""> <i data-feather="trash-2"
+                                        <a class="flex btn btn-danger mr-1" href=""> <i data-feather="trash-2"
                                                 class="w-4 h-4 mr-1"></i> Delete </a>
-                                        <a class="flex mr-3 text-warning" href="javascript:;" data-tw-toggle="modal"
+                                        <a class="flex btn bg btn-warning mr-1" href="javascript:;" data-tw-toggle="modal"
                                             data-tw-target="#team-modal-preview-{{ $key }}"> <i
                                                 data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a>
                                         <!-- BEGIN: Modal Toggle -->
