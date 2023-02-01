@@ -231,8 +231,8 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
 
     <script>
-        var calls = <?php if (isset($cardInfo['totalCallsMade'])) {
-            echo json_encode($cardInfo['totalCallsMade']);
+        var calls = <?php if (isset($cardInfo['entryData'])) {
+            echo json_encode($cardInfo['entryData']);
         } ?>;
         var recentGoal = <?php if (isset($cardInfo['recentGoal'])) {
             echo json_encode($cardInfo['recentGoal']);
@@ -248,6 +248,12 @@ License: You must have a valid license purchased only from themeforest(the above
         } ?>;
         var pitchesEachDay = <?php if (isset($cardInfo['pitchesEachDay'])) {
             echo json_encode($cardInfo['pitchesEachDay']);
+        } ?>;
+        var goalsIDs = <?php if (isset($cardInfo['goalIDs'])) {
+            echo json_encode($cardInfo['goalIDs']);
+        } ?>;
+        var goalsData = <?php if (isset($cardInfo['goals'])) {
+            echo json_encode($cardInfo['goals']);
         } ?>;
     </script>
 

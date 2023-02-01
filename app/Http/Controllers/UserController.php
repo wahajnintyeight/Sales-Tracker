@@ -56,106 +56,120 @@ class UserController extends Controller
         $totalCallsMade = array(0);
         $totalPitchesMade = array(0);
         $index = 0;
-        foreach ($organizationGoals as $goal) {
+        $entryData = OrganizationEntry::select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(pitches) as total_pitches'))
+            ->groupBy('organization_goal_id')
+            ->get();
+        // dd($entryData);
+        $goalIDs = array(0);
+        foreach ($organizationGoals as $i => $goal) {
             // $entries = $entries->concat(); //Fetch all entries for a goal
+            // dd($organizationGoals);
+            // foreach ($goal->entries as $entryKey => $entry) { //fetch all calls made in entries
 
-            foreach ($goal->entries as $entry) { //fetch all calls made in entries
-
-                $totalCallsMade[$index] = $totalCallsMade[$index] + $entry->calls;
-                $totalPitchesMade[$index] = $totalPitchesMade[$index] + $entry->pitches;
-            }
+            // $totalCallsMade[$entryKey] = $totalCallsMade[$entryKey] + $entry->calls;
+            // $totalPitchesMade[$entryKey] = $totalPitchesMade[$entryKey] + $entry->pitches;
+            // }
             $goalStartDate = $goal->goal_start_date;
             $goalEndDate = $goal->deadline;
-            $index = $index + 1;
-        }
+            // $index = $index + 1;
+            // if($i == 0){
 
-        $current = Carbon::createFromFormat('Y-m-d', $goalStartDate);
-        $goalEndDate = Carbon::createFromFormat('Y-m-d', $goalEndDate);
-        // dd($current);
-        $goalIndex = 0;
-        $goalDateRange = array($current); //, count($dates), 0);
-        while ($current <= $goalEndDate) {
-            $dates[] = clone $current;
-            $current->addDay();
-            $goalDateRange[$goalIndex] = $current->format('d-m');
-            $goalIndex++;
-        }
-        // dd($dates[2]->day);
-        // print_r($goalDateRange);
-        // dd($goalDateRange);
-        // dd($dates);
-        // Fetch month-based
-        $monthNum = Carbon::now()->month;
-        $yearNum = Carbon::now()->year;
+            // dd($goalEndDate);
+            // }
 
-        // Calls in current month
-        $callsEachDay = array(0);
-        $callsDates = array(0);
-        $callsIndex = 0;
+            $current = Carbon::createFromFormat('Y-m-d', $goalStartDate);
+            $goalEndDate = Carbon::createFromFormat('Y-m-d', $goalEndDate);
+            // dd($current);
+            $goalIndex = 0;
+            // $goalDateRange = array($current); //, count($dates), 0);
+            while ($current <= $goalEndDate) {
+                $dates[$i][] = clone $current;
+                $current->addDay();
+                $goalDateRange[$i][$goalIndex] = $current->format('d-m');
+                $goalIndex++;
+            }
+            // if($i == 1){
+            //     dd($goalDateRange);
+            // }
 
-        // Pitches in current month
-        $pitchesEachDay = array(0);
-        $pitchesDates = array(0);
-        $pitchesIndex = 0;
+            // Fetch month-based
+            $monthNum = Carbon::now()->month;
+            $yearNum = Carbon::now()->year;
 
+            // Calls in current month
+            $callsEachDay = array(0);
+            $callsDates = array(0);
+            $callsIndex = 0;
 
-        // $i = 0;
-        // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->get();
-        // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(pitches) as pitches')->get();
-        $entriesInMonth = OrganizationEntry::groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(pitches) as pitches')->get();
-        // dd($entriesInMonth);
-        // Fetch monthly data (current month)
-        foreach ($entriesInMonth as $em) {
-            $totalCallsMadeMonth += $em->calls;
-            $totalPitchesMadeMonth += $em->pitches;
+            // Pitches in current month
+            $pitchesEachDay = array(0);
+            $pitchesDates = array(0);
+            $pitchesIndex = 0;
 
 
-            $callsEachDay[$callsIndex] = $em->calls;
-            $callsDates[$callsIndex] = $em->performed_on;
+            // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->get();
+            // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(pitches) as pitches')->get();
+            $entriesInMonth = OrganizationEntry::groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(pitches) as pitches')->get(); // dd($entriesInMonth);
+            // Fetch monthly data (current month)
+            foreach ($entriesInMonth as $em) {
+                $totalCallsMadeMonth += $em->calls;
+                $totalPitchesMadeMonth += $em->pitches;
 
 
-            $callsIndex++;
+                $callsEachDay[$callsIndex] = $em->calls;
+                $callsDates[$callsIndex] = $em->performed_on;
 
-            // Pitches
-            $pitchesEachDay[$pitchesIndex] = $em->pitches;
-            $pitchesDates[$pitchesIndex] = $em->performed_on;
-            $pitchesIndex++;
-        }
 
-        $dateRangeInd = 0;
+                $callsIndex++;
 
-        $callsPerDays = array_fill(0, count($goalDateRange), 0);
-        $pitchesPerDays = array_fill(0, count($goalDateRange), 0);
+                // Pitches
+                $pitchesEachDay[$pitchesIndex] = $em->pitches;
+                $pitchesDates[$pitchesIndex] = $em->performed_on;
+                $pitchesIndex++;
+            }
 
-        $entries = [];
-        // dd($dates[0]->day);
-        foreach ($dates as $ind => $date) {
-            // $entries[$date->format('Y-m-d')] = 0;
-            foreach ($callsDates as $key => $loggedEntry) {
-                if ($date->isSameDay($loggedEntry)) {
-                    $callsPerDays[$ind] = $callsEachDay[$key];
-                } else {
 
+            // $callsPerDays = array_fill(0, count($goalDateRange[$i]), 0);
+            // $pitchesPerDays = array_fill(0, count($goalDateRange[$i]), 0);
+            $temp_callsPerDays = array_fill(0, count($goalDateRange[$i]), 0);
+            $temp_pitchesPerDays = array_fill(0, count($goalDateRange[$i]), 0);
+            $entries = [];
+            // if ($i == 1) {
+            // dd($dates[0]->day);
+            // if($i == 1){
+            // dd($dates[1]);
+            // }
+
+            foreach ($dates[$i] as $ind => $date) {
+                // $entries[$date->format('Y-m-d')] = 0;
+                foreach ($callsDates as $key => $loggedEntry) {
+                    if ($date->isSameDay($loggedEntry)) {
+                        $temp_callsPerDays[$ind] = $callsEachDay[$key];
+                    }
+                }
+                //pitches
+                // dd($pitchesDates);
+                foreach ($pitchesDates as $key2 => $loggedEntry) {
+                    if ($date->isSameDay($loggedEntry)) {
+                        $temp_pitchesPerDays[$ind] = $pitchesEachDay[$key2];
+                    }
                 }
             }
-            //pitches
-            // dd($pitchesDates);
-            foreach ($pitchesDates as $key2 => $loggedEntry) {
-                if ($date->isSameDay($loggedEntry)) {
-                    $pitchesPerDays[$ind] = $pitchesEachDay[$key2];
-                } else {
+            // dd($temp_pitchesPerDays);
 
-                }
+            // }
+            // dd($callsPerDays,$goalDateRange);
+            if (count($entriesInMonth) > 0) {
+                $avgEntr = ($totalCallsMadeMonth + $totalPitchesMadeMonth) / count($entriesInMonth);
+                // dd($entriesInMonth);
+            } else {
+                $avgEntr = 0;
             }
+            $callsPerDays[$i] = $temp_callsPerDays;
+            $pitchesPerDays[$i] = $temp_pitchesPerDays;
+            $goalIDs[$i] = $goal->id;
         }
-        // dd($callsPerDays,$goalDateRange);
-        if (count($entriesInMonth) > 0) {
-            $avgEntr = ($totalCallsMadeMonth + $totalPitchesMadeMonth) / count($entriesInMonth);
-            // dd($entriesInMonth);
-        } else {
-            $avgEntr = 0;
-        }
-        // dd($goalDateRange);
+        // dd($callsPerDays);
         $cards = [
             'entries' => $entries,
             'avgEntries' => $avgEntr,
@@ -163,14 +177,17 @@ class UserController extends Controller
             'callsEachDay' => $callsPerDays,
             'callsDates' => $goalDateRange,
             'pitchesEachDay' => $pitchesPerDays,
+            'goalIDs' => $goalIDs,
             'pitchesDates' => $goalDateRange,
             'totalPitchesMadeMonth' => $totalPitchesMadeMonth,
             'goals' => $organizationGoals,
             'recentGoal' => $organizationGoals[count($organizationGoals) - 1],
             'totalCallsMade' => $totalCallsMade,
+            'entryData' => $entryData,
             'totalPitchesMade' => $totalPitchesMade
         ];
-        // dd($cards);
+        // dd($cards['goals'][1]->id);
+        // dd($cards['goals'][1]->calls - $cards['entryData'][1]->total_calls);
         return $cards;
         // dd($entries, $organizationGoals[count($organizationGoals) - 1], $totalCallsMade);
     }

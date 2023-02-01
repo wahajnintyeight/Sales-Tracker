@@ -103,34 +103,36 @@
 
 // CHART
 
-console.log(callsEachDay);
-const ctx = document.getElementById('myChart');
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: callsDates,
-        datasets: [{
-            label: '# of Calls',
-            data: callsEachDay,
-            borderWidth: 1,
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
+console.log('goals>>',callsEachDay);
+for (let index = 0; index < goalsIDs.length; index++) {
+    const ctx = document.getElementById('daily-entry-chat' + goalsIDs[index]);
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: callsDates[index],
+            datasets: [{
+                label: '# of Calls',
+                data: callsEachDay[index],
+                borderWidth: 1,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            },
+            {
+                label: '# of Pitches',
+                data: pitchesEachDay[index],
+                borderWidth: 1,
+                fill: false,
+                borderColor: 'rgb(72, 112, 12)',
+                tension: 0.1
+            }]
         },
-        {
-            label: '# of Pitches',
-            data: pitchesEachDay,
-            borderWidth: 1,
-            fill: false,
-            borderColor: 'rgb(72, 112, 12)',
-            tension: 0.1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
         }
-    }
-});
+    });
+}
