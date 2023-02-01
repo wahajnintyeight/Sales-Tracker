@@ -37,7 +37,7 @@
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         @method('POST')
-                        <input type="submit" class="dropdown-item hover:bg-white/5" value="Logout">
+                        <input type="submit" class="dropdown-item hover:bg-white/5 w-full" value="Logout">
                     </form>
                 </li>
             </ul>
