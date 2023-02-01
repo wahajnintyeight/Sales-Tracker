@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer("created_by");
             $table->longText("description");
             $table->integer("incentive");
+            $table->date("goal_start_date");
             $table->date("deadline");
             $table->integer("k_p_i_id");
             $table->integer("calls");

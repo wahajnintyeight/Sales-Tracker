@@ -179,6 +179,12 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="side-nav__devider my-6"></div>
             <ul>
                 <li>
+                    <span href="{{ route('user.dashboard') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                        <div class="side-menu__title"> Team: {{ Auth::user()->team->name }} </div>
+                    </span>
+                </li>
+                <li>
                     <a href="{{ route('user.dashboard') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
                         <div class="side-menu__title"> Overview </div>
@@ -207,6 +213,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: JS Assets-->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
     <script src="{{ asset('dashboard-dist/dist/js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -222,12 +229,31 @@ License: You must have a valid license purchased only from themeforest(the above
             });
         });
     </script>
+
     <script>
-        var calls = <?php echo json_encode($cardInfo['totalCallsMade']); ?>;
-        var recentGoal = <?php echo json_encode($cardInfo['recentGoal']); ?>;
+        var calls = <?php if (isset($cardInfo['totalCallsMade'])) {
+            echo json_encode($cardInfo['totalCallsMade']);
+        } ?>;
+        var recentGoal = <?php if (isset($cardInfo['recentGoal'])) {
+            echo json_encode($cardInfo['recentGoal']);
+        } ?>;
+        var callsEachDay = <?php if (isset($cardInfo['callsEachDay'])) {
+            echo json_encode($cardInfo['callsEachDay']);
+        } ?>;
+        var callsDates = <?php if (isset($cardInfo['callsDates'])) {
+            echo json_encode($cardInfo['callsDates']);
+        } ?>;
+        var pitchesDates = <?php if (isset($cardInfo['pitchesDates'])) {
+            echo json_encode($cardInfo['pitchesDates']);
+        } ?>;
+        var pitchesEachDay = <?php if (isset($cardInfo['pitchesEachDay'])) {
+            echo json_encode($cardInfo['pitchesEachDay']);
+        } ?>;
     </script>
+
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-entry-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
+
 </body>
 
 </html>

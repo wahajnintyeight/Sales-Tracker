@@ -110,7 +110,7 @@
                     <thead>
                         <tr>
                             <th class="whitespace-nowrap">#</th>
-                            <th class="whitespace-nowrap">NAME</th>
+                            <th class="whitespace-nowrap">GOAL NAME</th>
                             <th class="whitespace-nowrap">CALLS MADE</th>
                             <th class="whitespace-nowrap">PITCHES MADE</th>
                             <th class="whitespace-nowrap">PERFORMED ON</th>
@@ -128,7 +128,8 @@
                                     </div>
                                 </td>
                                 <td class="w-5">
-                                    <a href="" class="font-medium whitespace-nowrap">{{ $entry->name }}</a>
+                                    <a href=""
+                                        class="font-medium whitespace-nowrap">{{ $entry->organizationGoal->name }}</a>
                                 </td>
                                 <td class="w-5">
                                     <a href="" class="font-medium whitespace-nowrap">{{ $entry->calls }}</a>
@@ -155,14 +156,7 @@
                                                 Delete
                                             </a>
                                         </div>
-                                        <div class="text-center p-1">
-                                            <a href="javascript:;" data-tw-toggle="modal"
-                                                data-tw-target="#team-modal-preview-{{ $key }}"
-                                                class="btn btn-primary m-1">
-                                                <i data-feather="user-plus" class="w-4 h-4 mr-1"></i>
-                                                Assign
-                                            </a>
-                                        </div> <!-- END: Modal Toggle -->
+
                                     </div>
                                 </td>
                                 <div id="team-modal-preview-{{ $key }}" class="modal" tabindex="-1"
