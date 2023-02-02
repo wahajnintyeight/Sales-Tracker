@@ -234,6 +234,9 @@ License: You must have a valid license purchased only from themeforest(the above
         var calls = <?php if (isset($cardInfo['entryData'])) {
             echo json_encode($cardInfo['entryData']);
         } ?>;
+        var fupCalls = <?php if (isset($cardInfo['fupEntryData'])) {
+            echo json_encode($cardInfo['fupEntryData']);
+        } ?>;
         var recentGoal = <?php if (isset($cardInfo['recentGoal'])) {
             echo json_encode($cardInfo['recentGoal']);
         } ?>;

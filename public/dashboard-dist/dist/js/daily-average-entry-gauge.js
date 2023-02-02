@@ -103,7 +103,7 @@
 
 // CHART
 
-console.log('goals>>',callsEachDay);
+console.log('goals>>',callsDates);
 for (let index = 0; index < goalsIDs.length; index++) {
     const ctx = document.getElementById('daily-entry-chat' + goalsIDs[index]);
     new Chart(ctx, {

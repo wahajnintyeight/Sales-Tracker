@@ -37,13 +37,29 @@ class UserController extends Controller
         $entries->save();
         return redirect()->back();
     }
+
+    public function addFUPEntry(Request $request)
+    {
+        // dd($request);
+        $entries = new OrganizationEntry();
+        $entries->calls = $request->org_calls;
+        // $entries
+        $entries->user_id = $request->user_id;
+        $entries->is_fup = 1;
+        $entries->pitches = $request->org_pitches;
+        $entries->organization_goal_id = $request->goal_id;
+
+        $entries->save();
+        return redirect()->back();
+    }
+
     public function viewCardsInfo()
     {
         // $goal = OrganizationGoal::all()->entries()->latest()->first();
         // $entries = OrganizationEntry::where('user_id', Auth::user()->id)->get();
         $kpi = KPI::find(1); //FETCH Organization KPI
         $organizationGoals = $kpi->organizationGoal->where('is_completed', 0); //Fetch all goals for Organization
-        // dd($organizationGoals);
+
         $entries = collect();
 
 
@@ -59,23 +75,14 @@ class UserController extends Controller
         $entryData = OrganizationEntry::select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(pitches) as total_pitches'))
             ->groupBy('organization_goal_id')
             ->get();
-        // dd($entryData);
+        $fupEntryData = OrganizationEntry::where('is_fup', 1)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(pitches) as total_pitches'))
+            ->groupBy('organization_goal_id')
+            ->get();
         $goalIDs = array(0);
         foreach ($organizationGoals as $i => $goal) {
-            // $entries = $entries->concat(); //Fetch all entries for a goal
-            // dd($organizationGoals);
-            // foreach ($goal->entries as $entryKey => $entry) { //fetch all calls made in entries
-
-            // $totalCallsMade[$entryKey] = $totalCallsMade[$entryKey] + $entry->calls;
-            // $totalPitchesMade[$entryKey] = $totalPitchesMade[$entryKey] + $entry->pitches;
-            // }
             $goalStartDate = $goal->goal_start_date;
             $goalEndDate = $goal->deadline;
-            // $index = $index + 1;
-            // if($i == 0){
 
-            // dd($goalEndDate);
-            // }
 
             $current = Carbon::createFromFormat('Y-m-d', $goalStartDate);
             $goalEndDate = Carbon::createFromFormat('Y-m-d', $goalEndDate);
@@ -84,13 +91,10 @@ class UserController extends Controller
             // $goalDateRange = array($current); //, count($dates), 0);
             while ($current <= $goalEndDate) {
                 $dates[$i][] = clone $current;
-                $current->addDay();
                 $goalDateRange[$i][$goalIndex] = $current->format('d-m');
+                $current->addDay();
                 $goalIndex++;
             }
-            // if($i == 1){
-            //     dd($goalDateRange);
-            // }
 
             // Fetch month-based
             $monthNum = Carbon::now()->month;
@@ -134,11 +138,6 @@ class UserController extends Controller
             $temp_callsPerDays = array_fill(0, count($goalDateRange[$i]), 0);
             $temp_pitchesPerDays = array_fill(0, count($goalDateRange[$i]), 0);
             $entries = [];
-            // if ($i == 1) {
-            // dd($dates[0]->day);
-            // if($i == 1){
-            // dd($dates[1]);
-            // }
 
             foreach ($dates[$i] as $ind => $date) {
                 // $entries[$date->format('Y-m-d')] = 0;
@@ -148,20 +147,16 @@ class UserController extends Controller
                     }
                 }
                 //pitches
-                // dd($pitchesDates);
                 foreach ($pitchesDates as $key2 => $loggedEntry) {
                     if ($date->isSameDay($loggedEntry)) {
                         $temp_pitchesPerDays[$ind] = $pitchesEachDay[$key2];
                     }
                 }
             }
-            // dd($temp_pitchesPerDays);
 
-            // }
-            // dd($callsPerDays,$goalDateRange);
             if (count($entriesInMonth) > 0) {
                 $avgEntr = ($totalCallsMadeMonth + $totalPitchesMadeMonth) / count($entriesInMonth);
-                // dd($entriesInMonth);
+
             } else {
                 $avgEntr = 0;
             }
@@ -169,7 +164,7 @@ class UserController extends Controller
             $pitchesPerDays[$i] = $temp_pitchesPerDays;
             $goalIDs[$i] = $goal->id;
         }
-        // dd($callsPerDays);
+
         $cards = [
             'entries' => $entries,
             'avgEntries' => $avgEntr,
@@ -184,11 +179,11 @@ class UserController extends Controller
             'recentGoal' => $organizationGoals[count($organizationGoals) - 1],
             'totalCallsMade' => $totalCallsMade,
             'entryData' => $entryData,
+            'fupEntryData' => $fupEntryData,
             'totalPitchesMade' => $totalPitchesMade
         ];
-        // dd($cards['goals'][1]->id);
-        // dd($cards['goals'][1]->calls - $cards['entryData'][1]->total_calls);
+        // dd($cards['fupEntryData']);
         return $cards;
-        // dd($entries, $organizationGoals[count($organizationGoals) - 1], $totalCallsMade);
+
     }
 }

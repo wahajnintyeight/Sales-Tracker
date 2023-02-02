@@ -34,6 +34,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     Route::get('/activities', [UserController::class, 'viewActivities'])->name('activities');
 
     Route::post('/activities/add', [UserController::class, 'addEntry'])->name('entry.add');
+    Route::post('/activities/fup/add',[UserController::class, 'addFUPEntry'])->name('entryfup.add');
 
 });
 

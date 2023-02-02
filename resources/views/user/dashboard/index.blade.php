@@ -117,13 +117,50 @@
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     @if (count($cardInfo['goals']) > 0)
                         @foreach ($cardInfo['goals'] as $goal)
+                            {{-- GAUGE 1 --}}
+                            <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                {{-- <div class="report-box "> --}}
+                                <div class="w-full">
+                                    <canvas width=350 height=190 class="justify-center"
+                                        id="fup-calls-gauge{{ $goal->id }}"
+                                        style=" display: block;
+                                        margin: 0 auto;"></canvas>
+                                    <div id="preview-textfield"></div>
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                </div>
+                                {{-- </div> --}}
+                            </div>
+                            <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <div class="w-full z-50">
+                                    {{-- <div class="flex"> --}}
+                                    {{-- CHART --}}
+                                    {{-- <div class="w-1/2"> --}}
+                                    <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
+                                    <div id="preview-textfield"></div>
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily
+                                        Average
+                                        Entries</span>
+                                    {{-- </div> --}}
+                                    {{-- </div> --}}
+                                </div>
+                            </div>
+                            {{-- GAUGE 2 --}}
+                            <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                {{-- <div class="report-box "> --}}
+                                <div class="w-full">
+                                    <canvas width=350 height=190 class="justify-center" id="calls-gauge{{ $goal->id }}"
+                                        style=" display: block;
+                                        margin: 0 auto;"></canvas>
+                                    <div id="preview-textfield"></div>
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
+                                </div>
+                                {{-- </div> --}}
+                            </div>
                             <div class="col-span-12 sm:col-span-12 xl:col-span-12 intro-y box p-5 zoom-in z-0">
                                 <div class="report-box ">
                                     <div class=" flex">
                                         <div style="z-index: 9999 !important" class="w-3/5 ">
-
                                             <div class="">
-
                                                 <div style="z-index: 9999 !important" class="ml-2 flex ">
                                                     <i data-feather="target" class="report-box__icon text-primary"></i>
                                                     <span class="m-1 p-2">
@@ -214,7 +251,6 @@
                                                         </div>
                                                     </div>
                                                 @endif
-
                                                 <div class="w-72 mt-4">
                                                     <div class="text-end">
                                                         <div class="mb-1 text-md font-medium p-2 dark:text-white"
@@ -225,7 +261,9 @@
                                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
                                                         <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
                                                             style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                                            <span style="z-index: 2000; position: absolute;left:90px;bottom:53px" class="mb-2">
+                                                            <span
+                                                                style="z-index: 2000; position: absolute;left:90px;bottom:53px"
+                                                                class="mb-2">
 
                                                                 Remaining Days:
                                                                 {{-- {{}} --}}
@@ -240,29 +278,7 @@
                                                     {{ Carbon\Carbon::createFromFormat('Y-m-d', $goal->deadline)->format('jS M Y') }}
                                                 </div>
                                             </div>
-
                                         </div>
-                                        <div class="w-full z-50">
-                                            <div class="flex">
-                                                {{-- GAUGE 1 --}}
-                                                <div class="w-1/2">
-                                                    <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
-                                                    <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily
-                                                        Average
-                                                        Entries</span>
-                                                </div>
-                                                {{-- GAUGE 2 --}}
-                                                <div class="w-1/2">
-                                                    <canvas width=350 height=190 class="justify-center"
-                                                        id="calls-gauge{{ $goal->id }}"></canvas>
-                                                    <div id="preview-textfield"></div>
-                                                    <span
-                                                        class="block mx-auto m-2 font-medium text-center p-2">Calls</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
