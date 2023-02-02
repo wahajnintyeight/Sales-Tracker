@@ -8,13 +8,6 @@
             <!-- BEGIN: General Report -->
             {{-- Personalized Cards -1 --}}
             <div class="col-span-12 mt-8">
-                {{-- <div class="intro-y flex items-center h-10">
-                <h2 class="text-lg font-medium truncate mr-5">
-
-                </h2>
-                <a href="" class="ml-auto flex items-center text-primary"> <i data-feather="refresh-ccw"
-                        class="w-4 h-4 mr-3"></i> Reload Data </a>
-            </div> --}}
 
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     {{-- Name --}}
@@ -31,12 +24,7 @@
                                 <div class="text-base text-slate-500 mt-1">
                                     {{ Auth::user()->email }}
                                 </div>
-                                {{-- <div class="flex">
 
-                                <i data-feather="users" class="w-4 h-4 mr-3 mt-1"></i>
-                                <div class="text-base text-slate-500 mt-1">
-                                </div>
-                            </div> --}}
                             </div>
                         </div>
                     </div>
@@ -226,6 +214,26 @@
                                                         </div>
                                                     </div>
                                                 @endif
+
+                                                <div class="w-72 mt-4">
+                                                    <div class="text-end">
+                                                        <div class="mb-1 text-md font-medium p-2 dark:text-white"
+                                                            style="text-align: end">
+                                                            Incentive: ${{ $goal->incentive }}</div>
+                                                    </div>
+                                                    <div class="w-full bg-indigo rounded-lg"
+                                                        style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
+                                                        <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                                            style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                                            <span style="z-index: 2000; position: absolute;left:90px">
+
+                                                                Remaining Days:
+                                                                {{-- {{}} --}}
+                                                                {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 {{-- CALLS END --}}
                                                 <div class="text-2xl font-medium leading-8 mt-6"></div>
                                                 <div class="text-base text-slate-500 mt-1">Deadline:
