@@ -225,7 +225,7 @@
                                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
                                                         <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
                                                             style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                                            <span style="z-index: 2000; position: absolute;left:90px">
+                                                            <span style="z-index: 2000; position: absolute;left:90px;bottom:53px" class="mb-2">
 
                                                                 Remaining Days:
                                                                 {{-- {{}} --}}
