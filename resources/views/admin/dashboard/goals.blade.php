@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-span-6">
                                 <label for="regular-form-1" class="form-label">Select Acceptance Criteria</label>
-                                <input type="text" class="form-control col-span-4" name="pitches"
+                                <input type="text" class="form-control col-span-4" name="organizations_reached"
                                     placeholder="Select Pitches" aria-label="default input inline 2">
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                             <a href="" class="font-medium whitespace-nowrap">{{ $goal->calls }}</a>
                         </td>
                         <td class="w-16">
-                            <a href="" class="font-medium whitespace-nowrap">{{ $goal->pitches }}</a>
+                            <a href="" class="font-medium whitespace-nowrap">{{ $goal->organizations_reached }}</a>
                         </td>
                         <td class="w-22">
                             <a href="" class="font-medium whitespace-nowrap">{{ $goal->deadline }}</a>

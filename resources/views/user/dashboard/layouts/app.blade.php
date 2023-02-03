@@ -181,7 +181,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <span href="{{ route('user.dashboard') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="side-menu__title"> Team: {{ Auth::user()->team->name }} </div>
+                        <div class="side-menu__title">
+                            @if (isset(Auth::user()->team) != null)
+                                Team: {{ Auth::user()->team->name }}
+                            @else
+                                Team: N/A
+                            @endif
+                        </div>
                     </span>
                 </li>
                 <li>
@@ -258,9 +264,15 @@ License: You must have a valid license purchased only from themeforest(the above
         var goalsData = <?php if (isset($cardInfo['goals'])) {
             echo json_encode($cardInfo['goals']);
         } ?>;
+        var goalsOnly = <?php if (isset($cardInfo['goalsOnly'])) {
+            echo json_encode($cardInfo['goalsOnly']);
+        } else {
+            echo 'false';
+        } ?>;
     </script>
 
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-entry-gauge.js') }}"></script>
+    <script src="{{ asset('dashboard-dist/dist/js/daily-average-organizations-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
 
 </body>

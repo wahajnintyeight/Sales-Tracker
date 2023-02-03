@@ -17,7 +17,7 @@ class OrganizationGoal extends Model
         'deadline',
         'k_p_i_id',
         'calls',
-        'pitches'
+        'organizations_reached'
     ];
     public function entries()
     {

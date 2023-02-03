@@ -13,7 +13,7 @@ class OrganizationEntry extends Model
         'calls',
         'user_id',
         'performed_on',
-        'pitches'
+        'organizations_reached'
     ];
     public function user()
     {

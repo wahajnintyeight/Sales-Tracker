@@ -57,9 +57,10 @@
                                         placeholder="Select Calls" aria-label="default input inline 1">
                                 </div>
                                 <div class="col-span-4">
-                                    <label for="regular-form-1" class="form-label">Enter Pitches</label>
+                                    <label for="regular-form-1" class="form-label">Enter the Number of Organizations
+                                        Reached</label>
                                     <input type="text" class="form-control col-span-4" name="org_pitches"
-                                        placeholder="Select Pitches" aria-label="default input inline 2">
+                                        placeholder="Enter the Number" aria-label="default input inline 2">
                                 </div>
                                 <div class="col-span-4">
                                     <label for="regular-form-1" class="form-label">Performed On</label>
@@ -206,7 +207,7 @@
                             <th class="whitespace-nowrap">#</th>
                             <th class="whitespace-nowrap">GOAL NAME</th>
                             <th class="whitespace-nowrap">CALLS MADE</th>
-                            <th class="whitespace-nowrap">PITCHES MADE</th>
+                            <th class="whitespace-nowrap">ORGANIZATIONS REACHED</th>
                             <th class="whitespace-nowrap">PERFORMED ON</th>
                             <th class="whitespace-nowrap">ACTIONS</th>
                         </tr>
@@ -228,7 +229,7 @@
                                 <td class="w-5">
                                     <a href="" class="font-medium whitespace-nowrap">{{ $entry->calls }}</a>
                                 </td>
-                                <td class="w-12">{{ $entry->pitches }}</td>
+                                <td class="w-12">{{ $entry->organizations_reached }}</td>
                                 <td class="w-40">
                                     {{ $entry->performed_on }}
                                 </td>
