@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="w-full mt-4">
                                     <div class="flex">
-                                        <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
+                                        <i data-feather="flag" class="report-box__icon text-primary mt-1"></i>
                                         <h1 class="mb-1 text-md font-medium p-2 xl:text-sm xl:font-sm">
                                             Organization Milestone</h1>
                                     </div>
@@ -288,7 +288,7 @@
                                                             </span>
                                                             <span class="m-1 p-2">
                                                                 {{ $goal->organizations_reached }} Organizations Reached to
-                                                                go!
+                                                                Go!
                                                                 <span class="text-base text-slate-500">( 0
                                                                     Made)
                                                                 </span>
@@ -311,7 +311,7 @@
                                                                 <span class="m-1 p-2">
                                                                     {{ $goal->calls - $cardInfo['entryData'][$index]->total_calls }}
                                                                     Calls to
-                                                                    go! <span
+                                                                    Go! <span
                                                                         class="text-base text-slate-500">({{ $cardInfo['entryData'][$index]->total_calls }}
                                                                         Made)</span>
                                                                 </span>
@@ -354,28 +354,26 @@
                         @endforeach
                     @else
                         <div class="grid grid-cols-12 gap-6 mt-5">
-
                             @foreach ($cardInfo['goals'] as $goal)
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                    <div class="w-full">
-                                        <canvas class="justify-center" id="fup-calls-gauge{{ $goal->id }}"
-                                            style=" display: block;
-                                    width:95%;margin-top:20px"></canvas>
+                                    <div class="w-full z-50" style="margin-top:100px">
+                                        <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
                                         <div id="preview-textfield"></div>
-                                        <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                        <span class="block mx-auto m-2 font-medium text-center p-2">Daily
+                                            Organizations Reached
+                                        </span>
                                     </div>
                                 </div>
+
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                    {{-- <div class="report-box "> --}}
-                                    <div class="w-full">
+                                    <div class="w-full" style="margin-top:50px">
                                         <canvas width=350 height=190 class="justify-center"
                                             id="calls-gauge{{ $goal->id }}"
                                             style=" display: block;
-                                        margin: 0 auto;"></canvas>
+                                            margin: 0 auto;margin-top:100px"></canvas>
                                         <div id="preview-textfield"></div>
                                         <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
                                     </div>
-                                    {{-- </div> --}}
                                 </div>
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                     <div class="w-full z-50">
@@ -515,9 +513,6 @@
             </div>
             {{-- End Cards - 2 --}}
         </div>
-
-
-
     </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

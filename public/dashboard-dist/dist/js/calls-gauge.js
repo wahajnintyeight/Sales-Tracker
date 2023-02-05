@@ -94,8 +94,8 @@ if (goalsOnly == true) {
             highDpiSupport: true, // High resolution support
             // renderTicks is Optional
             renderTicks: {
-                divisions: 10,
-                divWidth: 1.1,
+                divisions: 0,
+                divWidth: 0,
                 divLength: 0.3,
                 divColor: '#f5f5f5',
                 subDivisions: 10,
@@ -170,8 +170,8 @@ if (goalsOnly == true) {
             highDpiSupport: true, // High resolution support
             // renderTicks is Optional
             renderTicks: {
-                divisions: 10,
-                divWidth: 1.1,
+                divisions: 0,
+                divWidth: 0,
                 divLength: 0.3,
                 divColor: '#f5f5f5',
                 subDivisions: 10,
@@ -249,8 +249,8 @@ if (goalsOnly == true) {
             highDpiSupport: true, // High resolution support
             // renderTicks is Optional
             renderTicks: {
-                divisions: 10,
-                divWidth: 1.1,
+                divisions: 0,
+                divWidth: 0,
                 divLength: 0.3,
                 divColor: '#f5f5f5',
                 subDivisions: 10,

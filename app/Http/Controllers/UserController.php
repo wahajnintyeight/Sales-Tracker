@@ -67,6 +67,7 @@ class UserController extends Controller
             'goalIDs' => [0],
             'pitchesDates' => [],
             'totalPitchesMadeMonth' => 0,
+            'organizationsReachedEachDay' => 0,
             'goals' => [],
             'recentGoal' => 0,
             'totalCallsMade' => 0,

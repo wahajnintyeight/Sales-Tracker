@@ -1,7 +1,8 @@
 // CHART
 
+// console.log(goalsOnly)
 if (goalsOnly == true) {
-    for (let index = 0; index < goalsData.length; index++) {
+    for (let index = 0; index < goalsData; index++) {
         const ctx = document.getElementById('daily-organizations-reached' + goalsData[index].id);
         new Chart(ctx, {
             type: 'line',

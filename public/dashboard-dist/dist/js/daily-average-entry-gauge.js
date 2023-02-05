@@ -1,6 +1,7 @@
 // CHART
 
 if (goalsOnly == true) {
+    console.log("?",callsEachDay)
     for (let index = 0; index < goalsData.length; index++) {
         const ctx = document.getElementById('daily-entry-chat' + goalsData[index].id);
         new Chart(ctx, {

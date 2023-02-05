@@ -254,6 +254,8 @@ License: You must have a valid license purchased only from themeforest(the above
         } ?>;
         var appointmentsFixedEachDay = <?php if (isset($cardInfo['appointmentsFixed'])) {
             echo json_encode($cardInfo['appointmentsFixed']);
+        } else {
+            echo 0;
         } ?>;
         var pitchesDates = <?php if (isset($cardInfo['pitchesDates'])) {
             echo json_encode($cardInfo['pitchesDates']);
