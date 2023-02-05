@@ -252,11 +252,17 @@ License: You must have a valid license purchased only from themeforest(the above
         var callsDates = <?php if (isset($cardInfo['callsDates'])) {
             echo json_encode($cardInfo['callsDates']);
         } ?>;
+        var appointmentsFixedEachDay = <?php if (isset($cardInfo['appointmentsFixed'])) {
+            echo json_encode($cardInfo['appointmentsFixed']);
+        } ?>;
         var pitchesDates = <?php if (isset($cardInfo['pitchesDates'])) {
             echo json_encode($cardInfo['pitchesDates']);
         } ?>;
         var pitchesEachDay = <?php if (isset($cardInfo['pitchesEachDay'])) {
             echo json_encode($cardInfo['pitchesEachDay']);
+        } ?>;
+        var orgRchEachDay = <?php if (isset($cardInfo['organizationsReachedEachDay'])) {
+            echo json_encode($cardInfo['organizationsReachedEachDay']);
         } ?>;
         var goalsIDs = <?php if (isset($cardInfo['goalIDs'])) {
             echo json_encode($cardInfo['goalIDs']);
@@ -272,6 +278,8 @@ License: You must have a valid license purchased only from themeforest(the above
     </script>
 
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-entry-gauge.js') }}"></script>
+    <script src="{{ asset('dashboard-dist/dist/js/daily-appointments-fixed-chart.js') }}"></script>
+    <script src="{{ asset('dashboard-dist/dist/js/daily-pitches-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-organizations-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
 

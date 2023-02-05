@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->integer("user_id");
             $table->date("performed_on");
             $table->integer("organizations_reached");
+            $table->integer("fixed_apt")->default(0);
+            $table->integer("pitches")->default(0);
             $table->integer("is_fup")->default(0);
             $table->timestamps();
         });

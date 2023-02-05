@@ -106,7 +106,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
                 <li>
                     <a href="{{ route('admin.goals') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="user"></i> </div>
+                        <div class="side-menu__icon"> <i data-feather="target"></i> </div>
                         <div class="side-menu__title">
                             Goals
                         </div>
@@ -127,15 +127,50 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="{{ asset('dashboard-dist/dist/js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-           
+
             $('#myTable').DataTable({
                 paging: false,
                 "bInfo": false
             });
         });
+
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
     </script>
 </body>
 

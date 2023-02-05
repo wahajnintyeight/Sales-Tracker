@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->integer("is_completed")->default(0);
             $table->integer("k_p_i_id");
             $table->integer("calls");
+            $table->integer("fixed_apt")->default(0);
+            $table->integer("pitches")->default(0);
             $table->integer("organizations_reached");
             $table->timestamps();
         });

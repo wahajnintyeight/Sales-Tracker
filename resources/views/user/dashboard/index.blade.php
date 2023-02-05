@@ -117,13 +117,35 @@
                     <?php $index = 0; ?>
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         @foreach ($cardInfo['goals'] as $goal)
+                            {{-- PITCHES CHART --}}
+                            {{-- <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <div class="w-full z-50" style="margin-top:50px">
+                                    <canvas id="daily-pitches-chart{{ $goal->id }}"></canvas>
+                                    <div id="preview-textfield"></div>
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">Actual
+                                        Appointments
+                                    </span>
+                                </div>
+                            </div> --}}
+                            {{-- PITCHES CHART END --}}
+                            {{-- ORGANIZATION CHART --}}
+                            <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <div class="w-full z-50" style="margin-top:100px">
+                                    <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
+                                    <div id="preview-textfield"></div>
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily
+                                        Organizations Reached
+                                    </span>
+                                </div>
+                            </div>
+                            {{-- ORGANIZATION CHART END --}}
                             {{-- NAP GAUGE 2 --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                 {{-- <div class="report-box "> --}}
-                                <div class="w-full">
+                                <div class="w-full" style="margin-top:50px">
                                     <canvas width=350 height=190 class="justify-center" id="calls-gauge{{ $goal->id }}"
                                         style=" display: block;
-                                        margin: 0 auto;"></canvas>
+                                        margin: 0 auto;margin-top:100px"></canvas>
                                     <div id="preview-textfield"></div>
                                     <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
                                 </div>
@@ -131,7 +153,7 @@
                             {{-- NAP GAUGE 2 END --}}
                             {{-- CHART --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                <div class="w-full z-50">
+                                <div class="w-full z-50" style="margin-top:100px">
                                     <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
                                     <div id="preview-textfield"></div>
                                     <span class="block mx-auto m-2 font-medium text-center p-2">Daily
@@ -141,14 +163,68 @@
                                 </div>
                             </div>
                             {{-- CHART END --}}
+
+
+                            {{-- PROGRESS --}}
+                            <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <div class="w-full mt-4">
+                                    <div class="flex">
+                                        <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
+                                        <h1 class="mb-1 text-md xl:text-sm font-medium xl:font-sm p-2">
+                                            Track Your Incentive</h1>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="mb-1 text-md font-medium p-2 xl:text-sm xl:font-sm dark:text-white"
+                                            style="text-align: end">
+                                            Incentive: ${{ $goal->incentive }}</div>
+                                    </div>
+                                    <div class="w-full bg-indigo rounded-lg mt-4"
+                                        style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
+                                        <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                            style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                            <span
+                                                class="w-full text-center text-xs font-medium xl:text-sm xl:font-sm text-blue-100 mb-2"
+                                                style="position: absolute;top: 38%;left: 0;right: 0;transform: translateY(-50%);">
+                                                Remaining Days:
+                                                {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full mt-4">
+                                    <div class="flex">
+                                        <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
+                                        <h1 class="mb-1 text-md font-medium p-2 xl:text-sm xl:font-sm">
+                                            Organization Milestone</h1>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="mb-1 text-md font-medium p-2 dark:text-white xl:text-sm xl:font-sm"
+                                            style="text-align: end">
+                                            Total Organizations to be Reached: {{ $goal->organizations_reached }}</div>
+                                    </div>
+                                    <div class="w-full bg-indigo rounded-lg mt-4"
+                                        style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
+                                        <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                            style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                            <span
+                                                class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
+                                                style="position: absolute;top: 76%;left: 0;right: 0;transform: translateY(-50%);">
+                                                Organizations Reached:
+                                                {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- PROGRESS END --}}
+
                             {{-- FUP GAUGE 1 --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                 {{-- <div class="report-box "> --}}
                                 <div class="w-full">
-                                    <canvas width=350 height=190 class="justify-center"
-                                        id="fup-calls-gauge{{ $goal->id }}"
+                                    <canvas class="justify-center" id="fup-calls-gauge{{ $goal->id }}"
                                         style=" display: block;
-                                        margin: 0 auto;"></canvas>
+                                        margin: 0 auto; width:95%;margin-top:100px"></canvas>
                                     <div id="preview-textfield"></div>
                                     <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
                                 </div>
@@ -156,43 +232,19 @@
                             </div>
                             {{-- FUP GAUGE 1 END --}}
 
-                            {{-- PROGRESS --}}
-                            <div class="col-span-12 sm:col-span-12 xl:col-span-6 intro-y box p-5 zoom-in z-0">
-                                <div class="w-full mt-4">
-                                    <div class="flex">
-                                        <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
-                                        <h1 class="mb-1 text-md font-medium p-2">
-                                            Progress Bar</h1>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="mb-1 text-md font-medium p-2 dark:text-white" style="text-align: end">
-                                            Incentive: ${{ $goal->incentive }}</div>
-                                    </div>
-                                    <div class="w-full bg-indigo rounded-lg mt-4"
-                                        style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
-                                        <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                            style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                            <span class="w-full text-center text-xs font-medium text-blue-100 mb-2"
-                                                style="position: absolute;top: 44%;left: 0;right: 0;transform: translateY(-50%);">
-                                                Remaining Days:
-                                                {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- PROGRESS END --}}
-                            {{-- ORGANIZATION CHART --}}
-                            <div class="col-span-12 sm:col-span-12 xl:col-span-6 intro-y box p-5 zoom-in z-0">
-                                <div class="w-full z-50">
-                                    <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
+
+                            {{-- APPOINTMENTS FIXED CHART --}}
+                            <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <div class="w-full z-50" style="margin-top:100px">
+                                    <canvas id="daily-appointments-fixed-chart{{ $goal->id }}"></canvas>
                                     <div id="preview-textfield"></div>
-                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily
-                                        Organizations Reached
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">
+                                        Fixed Appointments
                                     </span>
                                 </div>
                             </div>
-                            {{-- ORGANIZATION CHART END --}}
+                            {{-- APPOINTMENTS FIXED END CHART --}}
+                            {{-- GOAL CARD --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-12 intro-y box p-5 zoom-in z-0">
                                 <div class="report-box ">
                                     <div class=" flex">
@@ -211,13 +263,13 @@
                                                             <span class="m-1 p-2"><i data-feather="briefcase"
                                                                     class="report-box__icon text-primary"></i>
                                                             </span>
-                                                            @if ($goal->organizations_reached >= $cardInfo['entryData'][$index]->total_pitches)
+                                                            @if ($goal->organizations_reached >= $cardInfo['entryData'][$index]->total_organizations_reached)
                                                                 <span class="m-1 p-2">
-                                                                    {{ $goal->organizations_reached - $cardInfo['entryData'][$index]->total_pitches }}
-                                                                    Organizations Reached
+                                                                    {{ $goal->organizations_reached - $cardInfo['entryData'][$index]->total_organizations_reached }}
+                                                                    Organizations to be Reached
                                                                     !
                                                                     <span
-                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index]->total_pitches }}
+                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index]->total_organizations_reached }}
                                                                         Made)
                                                                     </span>
                                                                 </span>
@@ -306,10 +358,9 @@
                             @foreach ($cardInfo['goals'] as $goal)
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                     <div class="w-full">
-                                        <canvas width=350 height=190 class="justify-center"
-                                            id="fup-calls-gauge{{ $goal->id }}"
+                                        <canvas class="justify-center" id="fup-calls-gauge{{ $goal->id }}"
                                             style=" display: block;
-                                    margin: 0 auto;"></canvas>
+                                    width:95%;margin-top:20px"></canvas>
                                         <div id="preview-textfield"></div>
                                         <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
                                     </div>
@@ -361,6 +412,32 @@
                                                         100,
                                                 ) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
                                                 <span class="w-full text-center text-xs font-medium text-blue-100 mb-2"
+                                                    style="position: absolute;top: 40%;left: 0;right: 0;transform: translateY(-50%);">
+                                                    Remaining Days:
+                                                    {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {{-- PROGRESS BAR END --}}
+                                    </div>
+                                    {{-- ORGANIZATIONS REACHED BAR --}}
+                                    <div class="w-full mt-4">
+                                        <div class="flex">
+                                            <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
+                                            <h1 class="mb-1 text-md font-medium p-2">
+                                                Organization Progress Bar</h1>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="mb-1 text-md font-medium p-2 dark:text-white"
+                                                style="text-align: end">
+                                                Organizations: {{ $goal->organizations_reached }}</div>
+                                        </div>
+                                        {{-- PROGRESS BAR --}}
+                                        <div class="w-full bg-indigo rounded-lg mt-4"
+                                            style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
+                                            <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                                style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                                <span class="w-full text-center text-xs font-medium text-blue-100 mb-2"
                                                     style="position: absolute;top: 44%;left: 0;right: 0;transform: translateY(-50%);">
                                                     Remaining Days:
                                                     {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
@@ -369,6 +446,7 @@
                                         </div>
                                         {{-- PROGRESS BAR END --}}
                                     </div>
+                                    {{-- ORGANIZATIONS REACHED BAR END --}}
                                 </div>
                                 {{-- PROGRESS END --}}
                                 {{-- ORGANIZATION CHART --}}
@@ -399,10 +477,10 @@
                                                                     class="report-box__icon text-primary"></i>
                                                             </span>
                                                             <span class="m-1 p-2">
-                                                                {{ $goal->organizations_reached }} organizations_reached to
-                                                                go!
+                                                                {{ $goal->organizations_reached }} Organizations Reached to
+                                                                be reached!
                                                                 <span class="text-base text-slate-500">( 0
-                                                                    Made)
+                                                                    Reached)
                                                                 </span>
                                                             </span>
                                                         </div>

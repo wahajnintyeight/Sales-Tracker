@@ -57,9 +57,11 @@ class AdminController extends Controller
         $goals->description = $request->description;
         $goals->k_p_i_id = $request->kpi_id;
         $goals->calls = $request->org_calls;
-        $goals->organizations_reached = $request->org_pitches;
+        $goals->pitches = $request->org_pitches;
+        $goals->organizations_reached = $request->org_reached;
+        $goals->fixed_apt = $request->org_fixed_appointment;
         $goals->incentive = $request->incentive;
         $goals->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Goal added Successfully');
     }
 }

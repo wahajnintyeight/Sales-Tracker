@@ -147,6 +147,10 @@ if (goalsOnly == true) {
 } {
     for (let index = 0; index < goalsIDs.length; index++) {
         var goalCalls = goalsData[index].calls;
+        if (typeof goalsData[index] == "undefined") {
+            console.log("????????")
+        }
+        console.log("ids", goalsIDs, goalCalls);
         const element = goalsIDs[index];
         var opts = {
             angle: -0.01, // The span of the gauge arc
@@ -214,11 +218,18 @@ if (goalsOnly == true) {
         gauge.maxValue = goalCalls; // set max gauge value
         gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
         gauge.animationSpeed = 32; // set animation speed (32 is default value)
-        gauge.set(calls[index].total_calls); // set actual value
+        console.log("calls>", calls[index]);
+        if (typeof calls[index] !== "undefined") {
+            gauge.set(calls[index].total_calls); // set actual value
+        } else {
+            gauge.set(0); // set actual value
+        }
     }
+
     // 2FUP GAUGE
     for (let index = 0; index < goalsIDs.length; index++) {
         var goalCalls = goalsData[index].calls;
+
         const element = goalsIDs[index];
         var opts = {
             angle: -0.01, // The span of the gauge arc
@@ -286,6 +297,11 @@ if (goalsOnly == true) {
         gauge.maxValue = goalCalls; // set max gauge value
         gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
         gauge.animationSpeed = 32; // set animation speed (32 is default value)
-        gauge.set(fupCalls[index].total_calls); // set actual value
+        if (typeof fupCalls[index] !== "undefined") {
+            console.log(fupCalls[index]);
+            gauge.set(fupCalls[index].total_calls); // set actual value
+        } else {
+            gauge.set(0); // set actual value
+        }
     }
 }

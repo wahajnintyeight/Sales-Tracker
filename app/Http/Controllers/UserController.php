@@ -90,10 +90,10 @@ class UserController extends Controller
                 $totalCallsMade = array(0);
                 $totalPitchesMade = array(0);
                 $index = 0;
-                $entryData = OrganizationEntry::where('user_id', Auth::user()->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_pitches'))
+                $entryData = OrganizationEntry::where('user_id', Auth::user()->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_organizations_reached'), DB::raw('SUM(pitches) as total_pitches'), DB::raw('SUM(fixed_apt) as appointments_fixed'))
                     ->groupBy('organization_goal_id')
                     ->get();
-                $fupEntryData = OrganizationEntry::where('is_fup', 1)->where('user_id', Auth::user()->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_pitches'))
+                $fupEntryData = OrganizationEntry::where('is_fup', 1)->where('user_id', Auth::user()->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_organizations_reached'), DB::raw('SUM(fixed_apt) as appointments_fixed'))
                     ->groupBy('organization_goal_id')
                     ->get();
                 $goalIDs = array(0);
@@ -130,32 +130,53 @@ class UserController extends Controller
                         $pitchesIndex = 0;
 
 
+                        // Organizations in current month
+                        $organizationsReachedEachDay = array(0);
+                        $organizationsReachedDates = array(0);
+                        $orgRchdIndex = 0;
+
+                        // Appointments fixed in current month
+                        $appointmentsFixedEachDay = array(0);
+                        $appointmentsFixedDates = array(0);
+                        $aptFixedIndex = 0;
+
                         // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->get();
                         // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(organizations_reached) as organizations_reached')->get();
-                        $entriesInMonth = OrganizationEntry::groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(organizations_reached) as organizations_reached')->get(); // dd($entriesInMonth);
+                        $entriesInMonth = OrganizationEntry::groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(organizations_reached) as organizations_reached, sum(pitches) as pitches, sum(fixed_apt) as appointments_fixed, sum(fixed_apt) as appointments_fixed')->get(); // dd($entriesInMonth);
                         // Fetch monthly data (current month)
                         foreach ($entriesInMonth as $em) {
                             $totalCallsMadeMonth += $em->calls;
                             $totalPitchesMadeMonth += $em->organizations_reached;
 
-
+                            // Calls
                             $callsEachDay[$callsIndex] = $em->calls;
                             $callsDates[$callsIndex] = $em->performed_on;
-
-
                             $callsIndex++;
 
                             // Pitches
-                            $pitchesEachDay[$pitchesIndex] = $em->organizations_reached;
+                            $pitchesEachDay[$pitchesIndex] = $em->pitches;
                             $pitchesDates[$pitchesIndex] = $em->performed_on;
                             $pitchesIndex++;
+
+                            // Organizations Reached
+                            $organizationsReachedEachDay[$orgRchdIndex] = $em->organizations_reached;
+                            $organizationsReachedDates[$orgRchdIndex] = $em->performed_on;
+                            $orgRchdIndex++;
+
+                            // Appointments Fixed
+                            $appointmentsFixedEachDay[$aptFixedIndex] = $em->appointments_fixed;
+                            $appointmentsFixedDates[$aptFixedIndex] = $em->performed_on;
+                            $aptFixedIndex++;
+
                         }
 
 
                         // $callsPerDays = array_fill(0, count($goalDateRange[$i]), 0);
                         // $pitchesPerDays = array_fill(0, count($goalDateRange[$i]), 0);
                         $temp_callsPerDays = array_fill(0, count($goalDateRange[$i]), 0);
+                        $temp_orgRchdPerDays = array_fill(0, count($goalDateRange[$i]), 0);
                         $temp_pitchesPerDays = array_fill(0, count($goalDateRange[$i]), 0);
+                        $temp_appointmentFixedPerDays = array_fill(0, count($goalDateRange[$i]), 0);
                         $entries = [];
 
                         foreach ($dates[$i] as $ind => $date) {
@@ -165,10 +186,22 @@ class UserController extends Controller
                                     $temp_callsPerDays[$ind] = $callsEachDay[$key];
                                 }
                             }
-                            //organizations_reached
+                            // pitches made
                             foreach ($pitchesDates as $key2 => $loggedEntry) {
                                 if ($date->isSameDay($loggedEntry)) {
                                     $temp_pitchesPerDays[$ind] = $pitchesEachDay[$key2];
+                                }
+                            }
+                            //organizations_reached
+                            foreach ($organizationsReachedDates as $key3 => $loggedEntry) {
+                                if ($date->isSameDay($loggedEntry)) {
+                                    $temp_orgRchdPerDays[$ind] = $organizationsReachedEachDay[$key3];
+                                }
+                            }
+                            //appointments fixed
+                            foreach ($appointmentsFixedDates as $key4 => $loggedEntry) {
+                                if ($date->isSameDay($loggedEntry)) {
+                                    $temp_appointmentFixedPerDays[$ind] = $appointmentsFixedEachDay[$key4];
                                 }
                             }
                         }
@@ -181,6 +214,8 @@ class UserController extends Controller
                         }
                         $callsPerDays[$i] = $temp_callsPerDays;
                         $pitchesPerDays[$i] = $temp_pitchesPerDays;
+                        $organizationReachedPerDays[$i] = $temp_orgRchdPerDays;
+                        $fixedAppointmentPerDays[$i] = $temp_appointmentFixedPerDays;
                         $goalIDs[$i] = $goal->id;
                     }
 
@@ -191,8 +226,10 @@ class UserController extends Controller
                         'callsEachDay' => $callsPerDays,
                         'callsDates' => $goalDateRange,
                         'pitchesEachDay' => $pitchesPerDays,
+                        'organizationsReachedEachDay' => $organizationReachedPerDays,
                         'goalIDs' => $goalIDs,
                         'pitchesDates' => $goalDateRange,
+                        'appointmentsFixed' => $fixedAppointmentPerDays,
                         'totalPitchesMadeMonth' => $totalPitchesMadeMonth,
                         'goals' => $organizationGoals,
                         'recentGoal' => $organizationGoals[count($organizationGoals) - 1],
@@ -201,9 +238,11 @@ class UserController extends Controller
                         'fupEntryData' => $fupEntryData,
                         'totalPitchesMade' => $totalPitchesMade
                     ];
+                    // dd($cards['pitchesPerDay']);
                 } else {
                     $cards['goals'] = $organizationGoals;
                     $cards['goalsOnly'] = true;
+
                     $cards['goalIDs'] = $goalIDs;
                     // dd($cards);
                     // $cards['onlyGoals'] = 
@@ -211,7 +250,8 @@ class UserController extends Controller
                 }
             }
         }
-        // dd($cards['fupEntryData']);
+       // dd($cards['appointmentsFixed']);
+        // dd($cards['pitchesEachDay']);
         return $cards;
 
     }
