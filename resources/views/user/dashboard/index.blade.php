@@ -215,15 +215,27 @@
                                     </div>
                                     <div class="w-full bg-indigo rounded-lg mt-4"
                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
-                                        <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                            style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                            <span
-                                                class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
-                                                style="position: absolute;top: 69%;left: 0;right: 0;transform: translateY(-50%);">
-                                                Organizations Reached:
-                                                {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
-                                            </span>
-                                        </div>
+                                        @if (isset($cardInfo['entryData'][$index]))
+                                            <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                                style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                                <span
+                                                    class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
+                                                    style="position: absolute;top: 69%;left: 0;right: 0;transform: translateY(-50%);">
+                                                    Organizations Reached:
+                                                    {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
+                                                </span>
+                                            </div>
+                                        @else
+                                            <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                                style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                                <span
+                                                    class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
+                                                    style="position: absolute;top: 69%;left: 0;right: 0;transform: translateY(-50%);">
+                                                    Organizations Reached:
+                                                   0
+                                                </span>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

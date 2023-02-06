@@ -15,6 +15,7 @@ class UserController extends Controller
     public function viewDashboard()
     {
         $cardInfo = $this->viewCardsInfo();
+        // dd($cardInfo);
         return view('user.dashboard.index', compact('cardInfo'));
     }
     public function viewActivities()
@@ -84,7 +85,7 @@ class UserController extends Controller
                 $entries = collect();
                 $goalStartDate = 0;
                 $goalEndDate = 0;
-
+                // dd("hh");
                 $totalCallsMadeMonth = 0;
                 $totalPitchesMadeMonth = 0;
 
@@ -131,6 +132,7 @@ class UserController extends Controller
                         $pitchesIndex = 0;
 
 
+
                         // Organizations in current month
                         $organizationsReachedEachDay = array(0);
                         $organizationsReachedDates = array(0);
@@ -170,7 +172,7 @@ class UserController extends Controller
                             $aptFixedIndex++;
 
                         }
-
+                      
 
                         // $callsPerDays = array_fill(0, count($goalDateRange[$i]), 0);
                         // $pitchesPerDays = array_fill(0, count($goalDateRange[$i]), 0);
