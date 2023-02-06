@@ -12,7 +12,7 @@ if (goalsOnly == true) {
                     data: appointmentsFixedEachDay[index],
                     borderWidth: 1,
                     fill: false,
-                    borderColor: 'rgb(153, 102, 254)',
+                    borderColor: '#95222D',
                     backgroundColor: 'rgb(153, 102, 255, 0.5)',
                     tension: 0.1
                 },
@@ -49,8 +49,8 @@ if (goalsOnly == true) {
                     data: appointmentsFixedEachDay[index],
                     borderWidth: 1,
                     fill: false,
-                    borderColor: 'rgb(153, 102, 254)',
-                    backgroundColor: 'rgb(153, 102, 255, 0.5)',
+                    borderColor: '#95222D',
+                    backgroundColor: '#95222D',
                     tension: 0.1
                 },
                 {
@@ -58,8 +58,8 @@ if (goalsOnly == true) {
                     data: pitchesEachDay[index],
                     borderWidth: 1,
                     fill: false,
-                    borderColor: 'rgb(255, 99, 135)',
-                    backgroundColor: 'rgb(255, 99, 132, 0.5)',
+                    borderColor: '#C1DA0F',
+                    backgroundColor: '#C1DA0F',
                     tension: 0.1
                 },
                 ]

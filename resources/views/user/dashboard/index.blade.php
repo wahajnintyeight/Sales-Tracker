@@ -130,6 +130,9 @@
                             {{-- PITCHES CHART END --}}
                             {{-- ORGANIZATION CHART --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                    style="font-size: 20px">Organization Accomplishments Report
+                                </span>
                                 <div class="w-full z-50" style="margin-top:100px">
                                     <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
                                     <div id="preview-textfield"></div>
@@ -142,6 +145,9 @@
                             {{-- NAP GAUGE 2 --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                 {{-- <div class="report-box "> --}}
+                                <span class="block mx-auto mt-2 font-bold text-start p-2" style="font-size: 20px">Calls
+                                    Countdown
+                                </span>
                                 <div class="w-full" style="margin-top:50px">
                                     <canvas width=350 height=190 class="justify-center" id="calls-gauge{{ $goal->id }}"
                                         style=" display: block;
@@ -153,6 +159,9 @@
                             {{-- NAP GAUGE 2 END --}}
                             {{-- CHART --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <span class="block mx-auto mt-2 font-bold text-start p-2" style="font-size: 20px">Daily
+                                    Calls Graph
+                                </span>
                                 <div class="w-full z-50" style="margin-top:100px">
                                     <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
                                     <div id="preview-textfield"></div>
@@ -170,7 +179,8 @@
                                 <div class="w-full mt-4">
                                     <div class="flex">
                                         <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
-                                        <h1 class="mb-1 text-md xl:text-sm font-medium xl:font-sm p-2">
+                                        <h1 class="mb-1 text-md xl:text-lg font-bold xl:font-sm p-2"
+                                            style="font-size: 20px">
                                             Track Your Incentive</h1>
                                     </div>
                                     <div class="text-end">
@@ -184,17 +194,18 @@
                                             style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
                                             <span
                                                 class="w-full text-center text-xs font-medium xl:text-sm xl:font-sm text-blue-100 mb-2"
-                                                style="position: absolute;top: 38%;left: 0;right: 0;transform: translateY(-50%);">
+                                                style="position: absolute;top: 34%;left: 0;right: 0;transform: translateY(-50%);">
                                                 Remaining Days:
                                                 {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="w-full mt-4">
                                     <div class="flex">
                                         <i data-feather="flag" class="report-box__icon text-primary mt-1"></i>
-                                        <h1 class="mb-1 text-md font-medium p-2 xl:text-sm xl:font-sm">
+                                        <h1 class="mb-1 text-md font-bold p-2 xl:text-lg" style="font-size: 20px">
                                             Organization Milestone</h1>
                                     </div>
                                     <div class="text-end">
@@ -208,7 +219,7 @@
                                             style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
                                             <span
                                                 class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
-                                                style="position: absolute;top: 76%;left: 0;right: 0;transform: translateY(-50%);">
+                                                style="position: absolute;top: 69%;left: 0;right: 0;transform: translateY(-50%);">
                                                 Organizations Reached:
                                                 {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
                                             </span>
@@ -221,6 +232,9 @@
                             {{-- FUP GAUGE 1 --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                 {{-- <div class="report-box "> --}}
+                                <span class="block mx-auto mt-2 font-bold text-center p-2" style="font-size: 20px">FUP
+                                    Calls Countdown
+                                </span>
                                 <div class="w-full">
                                     <canvas class="justify-center" id="fup-calls-gauge{{ $goal->id }}"
                                         style=" display: block;
@@ -235,6 +249,10 @@
 
                             {{-- APPOINTMENTS FIXED CHART --}}
                             <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                <span class="block mx-auto mt-2 font-bold text-center p-2" style="font-size: 20px">Daily
+                                    Pitch
+                                    Progress
+                                </span>
                                 <div class="w-full z-50" style="margin-top:100px">
                                     <canvas id="daily-appointments-fixed-chart{{ $goal->id }}"></canvas>
                                     <div id="preview-textfield"></div>
@@ -357,6 +375,9 @@
                             @foreach ($cardInfo['goals'] as $goal)
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                     <div class="w-full z-50" style="margin-top:100px">
+                                        <span class="block mx-auto m-2 font-medium text-center p-2">Daily
+                                            Organizations Reached
+                                        </span>
                                         <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
                                         <div id="preview-textfield"></div>
                                         <span class="block mx-auto m-2 font-medium text-center p-2">Daily
@@ -366,6 +387,8 @@
                                 </div>
 
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily Calls Tracker
+                                    </span>
                                     <div class="w-full" style="margin-top:50px">
                                         <canvas width=350 height=190 class="justify-center"
                                             id="calls-gauge{{ $goal->id }}"
@@ -376,7 +399,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                    <div class="w-full z-50">
+                                    <div class="w-full z-50"style="margin-top:100px">
                                         {{-- CHART --}}
                                         <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
                                         <div id="preview-textfield"></div>
@@ -387,12 +410,12 @@
                                     </div>
                                 </div>
                                 {{-- PROGRESS --}}
-                                <div class="col-span-12 sm:col-span-12 xl:col-span-6 intro-y box p-5 zoom-in z-0">
+                                <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                     <div class="w-full mt-4">
                                         <div class="flex">
                                             <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
                                             <h1 class="mb-1 text-md font-medium p-2">
-                                                Progress Bar</h1>
+                                                Track Your Incentive</h1>
                                         </div>
                                         <div class="text-end">
                                             <div class="mb-1 text-md font-medium p-2 dark:text-white"
@@ -410,7 +433,7 @@
                                                         100,
                                                 ) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
                                                 <span class="w-full text-center text-xs font-medium text-blue-100 mb-2"
-                                                    style="position: absolute;top: 40%;left: 0;right: 0;transform: translateY(-50%);">
+                                                    style="position: absolute;top: 34%;left: 0;right: 0;transform: translateY(-50%);">
                                                     Remaining Days:
                                                     {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
                                                 </span>
@@ -423,22 +446,23 @@
                                         <div class="flex">
                                             <i data-feather="dollar-sign" class="report-box__icon text-primary mt-1"></i>
                                             <h1 class="mb-1 text-md font-medium p-2">
-                                                Organization Progress Bar</h1>
+                                                Organization Milestone</h1>
                                         </div>
                                         <div class="text-end">
                                             <div class="mb-1 text-md font-medium p-2 dark:text-white"
                                                 style="text-align: end">
-                                                Organizations: {{ $goal->organizations_reached }}</div>
+                                                Total Organizations to be Reached:{{ $goal->organizations_reached }}</div>
                                         </div>
                                         {{-- PROGRESS BAR --}}
                                         <div class="w-full bg-indigo rounded-lg mt-4"
                                             style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
                                             <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
                                                 style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                                <span class="w-full text-center text-xs font-medium text-blue-100 mb-2"
-                                                    style="position: absolute;top: 44%;left: 0;right: 0;transform: translateY(-50%);">
-                                                    Remaining Days:
-                                                    {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
+                                                <span
+                                                    class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
+                                                    style="position: absolute;top: 69%;left: 0;right: 0;transform: translateY(-50%);">
+                                                    Organizations Reached:
+                                                    0
                                                 </span>
                                             </div>
                                         </div>
@@ -447,16 +471,30 @@
                                     {{-- ORGANIZATIONS REACHED BAR END --}}
                                 </div>
                                 {{-- PROGRESS END --}}
-                                {{-- ORGANIZATION CHART --}}
-                                <div class="col-span-12 sm:col-span-12 xl:col-span-6 intro-y box p-5 zoom-in z-0">
-                                    <div class="w-full z-50">
-                                        <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
+                                {{-- FUP GAUGE 1 --}}
+                                <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                    {{-- <div class="report-box "> --}}
+                                    <div class="w-full">
+                                        <canvas class="justify-center" id="fup-calls-gauge{{ $goal->id }}"
+                                            style=" display: block;
+                                        margin: 0 auto; width:95%;margin-top:100px"></canvas>
                                         <div id="preview-textfield"></div>
-                                        <span class="block mx-auto m-2 font-medium text-center p-2">Daily
-                                            Organizations Reached
+                                        <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                    </div>
+                                    {{-- </div> --}}
+                                </div>
+                                {{-- FUP GAUGE 1 END --}}
+
+                                {{-- FIXED APPOINTMENTS CHART --}}
+                                <div class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                    <div class="w-full z-50" style="margin-top:100px">
+                                        <canvas id="daily-appointments-fixed-chart{{ $goal->id }}"></canvas>
+                                        <div id="preview-textfield"></div>
+                                        <span class="block mx-auto m-2 font-medium text-center p-2">Fixed Appointments
                                         </span>
                                     </div>
                                 </div>
+                                {{-- FIXED APPOINTMENTS CHART END --}}
                                 <div class="col-span-12 sm:col-span-12 xl:col-span-12 intro-y box p-5 zoom-in z-0">
                                     <div class="report-box ">
                                         <div class=" flex">
