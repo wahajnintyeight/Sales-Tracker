@@ -12,7 +12,7 @@ class TeamController extends Controller
         // dd($request);
         $team = new Team();
         $team->name = $request->name;
-        $team->members_count = $request->members;
+        // $team->members_count = $request->members;
         $team->save();
         return redirect('admin/teams');
     }
