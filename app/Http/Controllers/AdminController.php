@@ -52,10 +52,12 @@ class AdminController extends Controller
         $goals = new OrganizationGoal();
         $goals->name = $request->title;
         $date = Carbon::createFromFormat('d M, Y', $request->deadline)->format('Y-m-d');
+        $goal_start_date = Carbon::createFromFormat('d M, Y', $request->org_goal_start_date)->format('Y-m-d');
         $goals->deadline = $date;
         $goals->created_by = $request->created_by;
         $goals->description = $request->description;
         $goals->k_p_i_id = $request->kpi_id;
+        $goals->goal_start_date = $goal_start_date;
         $goals->calls = $request->org_calls;
         $goals->pitches = $request->org_pitches;
         $goals->organizations_reached = $request->org_reached;

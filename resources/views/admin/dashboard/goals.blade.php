@@ -60,16 +60,22 @@
                         {{-- Oranization Field Row - 2 --}}
                         <div id="input" class="p-3 org-kpi">
                             <div class="grid grid-cols-12 gap-2">
-                                <div class="col-span-6">
+                                <div class="col-span-4">
                                     <label for="regular-form-1" class="form-label">Select Calls</label>
                                     <input type="text" class="form-control col-span-4" name="org_calls"
                                         placeholder="Number of Calls to Complete the Goal"
                                         aria-label="default input inline 1">
                                 </div>
-                                <div class="col-span-6">
+                                <div class="col-span-4">
                                     <label for="regular-form-1" class="form-label">Select Pitches</label>
                                     <input type="text" class="form-control col-span-4" name="org_pitches"
                                         placeholder="Number of Pitches to Complete the Goal"
+                                        aria-label="default input inline 2">
+                                </div>
+                                <div class="col-span-4">
+                                    <label for="regular-form-1" class="form-label">Select Start Date</label>
+                                    <input type="text" class="form-control datepicker block col-span-4" name="org_goal_start_date"
+                                        placeholder="Select Starting Date for the Goal" data-single-mode="true"
                                         aria-label="default input inline 2">
                                 </div>
                             </div>
