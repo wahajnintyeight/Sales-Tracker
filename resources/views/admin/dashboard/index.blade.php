@@ -6,7 +6,7 @@
         <!-- END: Top Bar -->
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12 2xl:col-span-9">
-                <div class="grid grid-cols-12 gap-6">
+                {{-- <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: General Report -->
                     <div class="col-span-12 mt-8">
                         <div class="intro-y flex items-center h-10">
@@ -361,9 +361,12 @@
                     <!-- BEGIN: Weekly Top Products -->
 
                     <!-- END: Weekly Top Products -->
+                </div> --}}
+                <div class="container m-6 p-6">
+                    <h2 class="w-full h-full p-4 m-6 block text-black font-bold">No Data for Admin at the moment.</h2>
                 </div>
             </div>
-            <div class="col-span-12 2xl:col-span-3">
+            {{-- <div class="col-span-12 2xl:col-span-3">
                 <div class="2xl:border-l -mb-10 pb-10">
                     <div class="2xl:pl-6 grid grid-cols-12 gap-6">
                         <!-- BEGIN: Transactions -->
@@ -473,7 +476,7 @@
                         <!-- END: Schedules -->
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
