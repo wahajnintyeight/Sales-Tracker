@@ -2,8 +2,10 @@
 
 // console.log(goalsOnly)
 if (goalsOnly == true) {
+    console.log(goalsData, goalsIDs);
     for (let index = 0; index < goalsData.length; index++) {
         const ctx = document.getElementById('daily-organizations-reached' + goalsData[index].id);
+        console.log("?????????????????????????");
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -29,8 +31,19 @@ if (goalsOnly == true) {
         });
     }
 } else {
+    // orgRchEachDay = fill(null, 0);
+    // console.log(or)
+  
     for (let index = 0; index < goalsIDs.length; index++) {
         const ctx = document.getElementById('daily-organizations-reached' + goalsIDs[index]);
+         
+
+        if (orgRchEachDay[index].length <= 1) {
+            orgRchEachDay[index] = 0
+        }
+        if (callsDates[index].length <= 1) {
+            callsDates[index] = ["0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0"]
+        }
         new Chart(ctx, {
             type: 'line',
             data: {

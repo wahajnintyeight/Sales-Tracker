@@ -40,6 +40,16 @@ if (goalsOnly == true) {
 } else {
     for (let index = 0; index < goalsIDs.length; index++) {
         const ctx = document.getElementById('daily-appointments-fixed-chart' + goalsIDs[index]);
+        console.log(appointmentsFixedEachDay[index].length, pitchesEachDay[index].length)
+        if (appointmentsFixedEachDay[index].length <= 1) {
+            appointmentsFixedEachDay[index] = 0
+        }
+        if (pitchesEachDay[index].length <= 1) {
+            pitchesEachDay[index] = 0
+        }
+        if (callsDates[index].length <= 1) {
+            callsDates[index] = ["0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0"]
+        }
         new Chart(ctx, {
             type: 'line',
             data: {

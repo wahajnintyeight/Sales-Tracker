@@ -281,7 +281,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-entry-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/daily-appointments-fixed-chart.js') }}"></script>
-    <script src="{{ asset('dashboard-dist/dist/js/daily-pitches-gauge.js') }}"></script>
+    // <script src="{{ asset('dashboard-dist/dist/js/daily-pitches-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-organizations-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
 

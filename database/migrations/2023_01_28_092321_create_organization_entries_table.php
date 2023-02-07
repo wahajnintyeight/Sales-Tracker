@@ -15,12 +15,12 @@ return new class extends Migration {
         Schema::create('organization_entries', function (Blueprint $table) {
             $table->id();
             $table->integer("organization_goal_id");
-            $table->integer("calls");
+            $table->integer("calls")->default(0)->nullable();
             $table->integer("user_id");
             $table->date("performed_on");
-            $table->integer("organizations_reached");
-            $table->integer("fixed_apt")->default(0);
-            $table->integer("pitches")->default(0);
+            $table->integer("organizations_reached")->default(0)->nullable();
+            $table->integer("fixed_apt")->default(0)->nullable();
+            $table->integer("pitches")->default(0)->nullable();
             $table->integer("is_fup")->default(0);
             $table->timestamps();
         });

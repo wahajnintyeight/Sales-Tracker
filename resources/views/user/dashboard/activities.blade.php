@@ -59,7 +59,7 @@
                                 <div class="col-span-4">
                                     <label for="regular-form-1" class="form-label">Enter the Number of Organizations
                                         Reached</label>
-                                    <input type="text" class="form-control col-span-4" name="org_pitches"
+                                    <input type="text" class="form-control col-span-4" name="org_organizations_reached"
                                         placeholder="Enter the Number" aria-label="default input inline 2">
                                 </div>
                                 <div class="col-span-4">
@@ -67,6 +67,22 @@
                                     <input type="text" class="form-control datepicker block col-span-4"
                                         name="performed_on" placeholder="Select Deadline"
                                         aria-label="default input inline 3" data-single-mode="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="input" class="p-3 org-kpi">
+                            <div class="grid grid-cols-12 gap-2">
+                                <div class="col-span-6">
+                                    <label for="regular-form-1" class="form-label">Enter the Number of Fixed Appointments
+                                    </label>
+                                    <input type="text" class="form-control col-span-4" name="org_fixed_appointments"
+                                        placeholder="Enter the Number" aria-label="default input inline 2">
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="regular-form-1" class="form-label">Enter the Number of Actual Appointments
+                                    </label>
+                                    <input type="text" class="form-control col-span-4" name="org_actual_appointments"
+                                        placeholder="Enter the Number" aria-label="default input inline 2">
                                 </div>
                             </div>
                         </div>

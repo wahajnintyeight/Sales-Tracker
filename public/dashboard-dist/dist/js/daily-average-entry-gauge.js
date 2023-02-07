@@ -1,7 +1,7 @@
 // CHART
 
 if (goalsOnly == true) {
-    console.log("?",callsEachDay)
+    // console.log("?",callsEachDay)
     for (let index = 0; index < goalsData.length; index++) {
         const ctx = document.getElementById('daily-entry-chat' + goalsData[index].id);
         new Chart(ctx, {
@@ -32,6 +32,10 @@ if (goalsOnly == true) {
 } else {
     for (let index = 0; index < goalsIDs.length; index++) {
         const ctx = document.getElementById('daily-entry-chat' + goalsIDs[index]);
+        if (callsEachDay[index].length <= 1 && callsDates[index].length <= 1) {
+            callsEachDay[index] = 0
+            callsDates[index] = ["0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0"]
+        }
         new Chart(ctx, {
             type: 'line',
             data: {
