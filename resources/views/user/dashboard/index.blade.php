@@ -1,5 +1,6 @@
 @extends('user.dashboard.layouts.app')
 @section('content')
+    {{-- <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet"> --}}
     <div class="content">
         <!-- BEGIN: Top Bar -->
         @include('user.dashboard.layouts.topbar')
@@ -190,14 +191,16 @@
                                     </div>
                                     <div class="w-full bg-indigo rounded-lg mt-4"
                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
-                                        <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                            style="width:{{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                            <span
-                                                class="w-full text-center text-xs font-medium xl:text-sm xl:font-sm text-blue-100 mb-2"
-                                                style="position: absolute;top: 34%;left: 0;right: 0;transform: translateY(-50%);">
-                                                Remaining Days:
-                                                {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
-                                            </span>
+
+                                        <div
+                                            class="w-full rounded-lg text-xs font-medium text-blue-100 text-center leading-none">
+                                            <div class="text-xs leading-none py-1 text-center text-white"
+                                                style="width: {{ abs((Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) / count($cardInfo['callsDates'][$index])) * 100 - 100) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
+                                                <span class="mb-2" style="z-index: 10;position:absolute;display:block">
+                                                    {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
+                                                    Remaining Days
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -216,15 +219,33 @@
                                     <div class="w-full bg-indigo rounded-lg mt-4"
                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
 
+
                                         @if (isset($cardInfo['entryData'][$index]))
-                                            <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                                style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
+                                            <div
+                                                class="w-full rounded-lg text-xs font-medium text-blue-100 text-center leading-none">
+                                                <div class="text-xs leading-none py-1 text-center text-white"
+                                                    style="width: {{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
+                                                    <span class="mb-2"
+                                                        style="z-index: 10;position:absolute;display:block">
+                                                        {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
+                                                        Organizations Reached
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
+                                                style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                              "
+                                                id="bar{{ $goal->id }}">
                                                 <span
-                                                    class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2">
+                                                    class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mt-2"
+                                                    style=" text-align: center;
+                                                    width: 100%;">
                                                     Organizations Reached:
                                                     {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
                                                 </span>
-                                            </div>
+                                            </div> --}}
                                         @else
                                             <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
                                                 style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
@@ -437,18 +458,22 @@
                                         {{-- PROGRESS BAR --}}
                                         <div class="w-full bg-indigo rounded-lg mt-4"
                                             style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
-                                            <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                                style="width: {{ abs(
-                                                    (Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) /
-                                                        Carbon\Carbon::parse($goal->goal_start_date)->diffInDays(Carbon\Carbon::parse($goal->deadline))) *
-                                                        100 -
-                                                        100,
-                                                ) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                                <span class="w-full text-center text-xs font-medium text-blue-100 mb-2"
-                                                    style="position: absolute;top: 34%;left: 0;right: 0;transform: translateY(-50%);">
-                                                    Remaining Days:
-                                                    {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
-                                                </span>
+                                            {{-- @dd(Carbon\Carbon::parse($goal->goal_start_date)->diffInDays(Carbon\Carbon::parse($goal->deadline)) * 100 - 100) --}}
+                                            <div
+                                                class="w-full rounded-lg text-xs font-medium text-blue-100 text-center leading-none">
+                                                <div class="text-xs leading-none py-1 text-center text-white"
+                                                    style="width: {{ abs(
+                                                        (Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) /
+                                                            Carbon\Carbon::parse($goal->goal_start_date)->diffInDays(Carbon\Carbon::parse($goal->deadline))) *
+                                                            100 -
+                                                            100,
+                                                    ) }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
+                                                    <span class="mb-2"
+                                                        style="z-index: 10;position:absolute;display:block">
+                                                        Remaining Days:
+                                                        {{ Carbon\Carbon::parse($goal->deadline)->diffInDays(Carbon\Carbon::now()) }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                         {{-- PROGRESS BAR END --}}
@@ -468,15 +493,14 @@
                                         {{-- PROGRESS BAR --}}
                                         <div class="w-full bg-indigo rounded-lg mt-4"
                                             style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
-                                            <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                                style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
-                                                <span
-                                                    class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mb-2"
-                                                    style="position: absolute;top: 69%;left: 0;right: 0;transform: translateY(-50%);">
+                                            <div class="text-xs leading-none py-1 text-center text-white"
+                                                style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
+                                                <span class="mb-2" style="z-index: 10;position:absolute;display:block">
                                                     Organizations Reached:
                                                     0
                                                 </span>
                                             </div>
+
                                         </div>
                                         {{-- PROGRESS BAR END --}}
                                     </div>
@@ -577,6 +601,23 @@
         #calls-gauge {
             display: block;
             margin: 0 auto;
+        }
+
+        .progress:before {
+            content: attr(data-label);
+            font-size: 0.8em;
+            position: absolute;
+            text-align: center;
+            top: 5px;
+            left: 0;
+            right: 0;
+        }
+
+        .progress {
+            height: 1.5em;
+            width: 100%;
+            /* background-color: #c9c9c9; */
+            position: relative;
         }
     </style>
 @endsection
