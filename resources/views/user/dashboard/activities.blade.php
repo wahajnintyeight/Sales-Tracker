@@ -1,5 +1,6 @@
 @extends('user.dashboard.layouts.app')
 @section('content')
+    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css" />
     <div class="content">
         @include('user.dashboard.layouts.topbar')
@@ -50,39 +51,41 @@
                     <section class="org-kpi">
                         {{-- Oranization Field Row - 2 --}}
                         <div id="input" class="p-3 org-kpi">
-                            <div class="grid grid-cols-12 gap-2">
-                                <div class="col-span-4">
+                            <div class="grid xl:grid-cols-3 lg:grid-cols-3 xs:grid-cols-12 sm:grid-cols-12 gap-3">
+                                <div class="lg:col-span-4 xs:col-span-12 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Enter Calls</label>
-                                    <input type="text" class="form-control col-span-4" name="org_calls"
-                                        placeholder="Select Calls" aria-label="default input inline 1">
+                                    <input type="text" class="form-control" name="org_calls" placeholder="Select Calls"
+                                        aria-label="default input inline 1">
                                 </div>
-                                <div class="col-span-4">
+                                <div class="lg:col-span-4 xs:col-span-12 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Enter the Number of Organizations
                                         Reached</label>
-                                    <input type="text" class="form-control col-span-4" name="org_organizations_reached"
+                                    <input type="text" class="form-control" name="org_organizations_reached"
                                         placeholder="Enter the Number" aria-label="default input inline 2">
                                 </div>
-                                <div class="col-span-4">
+                                <div class="lg:col-span-4 xs:col-span-12 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Performed On</label>
-                                    <input type="text" class="form-control datepicker block col-span-4"
-                                        name="performed_on" placeholder="Select Deadline"
-                                        aria-label="default input inline 3" data-single-mode="true">
+                                    <input type="text" class="form-control datepicker block" name="performed_on"
+                                        placeholder="Select Deadline" aria-label="default input inline 3"
+                                        data-single-mode="true">
                                 </div>
                             </div>
                         </div>
                         <div id="input" class="p-3 org-kpi">
                             <div class="grid grid-cols-12 gap-2">
-                                <div class="col-span-6">
+                                <div class="col-span-6 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Enter the Number of Fixed Appointments
                                     </label>
-                                    <input type="text" class="form-control col-span-4" name="org_fixed_appointments"
-                                        placeholder="Enter the Number" aria-label="default input inline 2">
+                                    <input type="text" class="form-control col-span-4 sm:col-span-12"
+                                        name="org_fixed_appointments" placeholder="Enter the Number"
+                                        aria-label="default input inline 2">
                                 </div>
-                                <div class="col-span-6">
+                                <div class="col-span-6 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Enter the Number of Actual Appointments
                                     </label>
-                                    <input type="text" class="form-control col-span-4" name="org_actual_appointments"
-                                        placeholder="Enter the Number" aria-label="default input inline 2">
+                                    <input type="text" class="form-control col-span-4 sm:col-span-12"
+                                        name="org_actual_appointments" placeholder="Enter the Number"
+                                        aria-label="default input inline 2">
                                 </div>
                             </div>
                         </div>
@@ -93,12 +96,12 @@
                         {{-- Advertising Field Row - 1 --}}
                         <div id="input" class="p-3">
                             <div class="grid grid-cols-12 gap-2">
-                                <div class="col-span-6">
+                                <div class="col-span-6 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Select Calls</label>
                                     <input type="text" class="form-control col-span-4" name="adv_calls"
                                         placeholder="Select Calls" aria-label="default input inline 1">
                                 </div>
-                                <div class="col-span-6">
+                                <div class="col-span-6 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Select Acceptance Criteria</label>
                                     <input type="text" class="form-control col-span-4" name="adv_pitches"
                                         placeholder="Select Pitches" aria-label="default input inline 2">
