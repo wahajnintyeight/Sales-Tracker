@@ -50,7 +50,29 @@
                     {{-- Oranization Field Row - 1 --}}
                     <section class="org-kpi">
                         {{-- Oranization Field Row - 2 --}}
-                        <div id="input" class="p-3 org-kpi">
+                        <div class="flex flex-wrap overflow-hidden">
+                            <div
+                                class="w-full px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-full md:px-1 md:my-1 lg:w-1/3 lg:px-1 lg:my-1 xl:w-1/3 ">
+                                <label for="regular-form-1" class="form-label">Enter Calls</label>
+                                <input type="text" class="form-control" name="org_calls" placeholder="Select Calls"
+                                    aria-label="default input inline 1">
+                            </div>
+                            <div
+                                class="w-full px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-full md:px-1 md:my-1 lg:w-1/3 lg:px-1 lg:my-1 xl:w-1/3 ">
+                                <label for="regular-form-1" class="form-label">No. of Org Reached</label>
+                                <input type="text" class="form-control" name="org_organizations_reached"
+                                    placeholder="Enter the Number" aria-label="default input inline 2">
+                            </div>
+                            <div
+                                class="w-full  px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-full md:px-1 md:my-1 lg:w-1/3 lg:px-1 lg:my-1 xl:w-1/3 ">
+                                <label for="regular-form-1" class="form-label">Performed On</label>
+                                <input type="text" class="form-control datepicker block" name="performed_on"
+                                    placeholder="Select Deadline" aria-label="default input inline 3"
+                                    data-single-mode="true">
+                            </div>
+                        </div>
+
+                        {{-- <div id="input" class="p-3 org-kpi">
                             <div class="grid xl:grid-cols-3 lg:grid-cols-3 xs:grid-cols-12 sm:grid-cols-12 gap-3">
                                 <div class="lg:col-span-4 xs:col-span-12 sm:col-span-12">
                                     <label for="regular-form-1" class="form-label">Enter Calls</label>
@@ -70,7 +92,7 @@
                                         data-single-mode="true">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div id="input" class="p-3 org-kpi">
                             <div class="grid grid-cols-12 gap-2">
                                 <div class="col-span-6 sm:col-span-12">
