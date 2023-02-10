@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Route;
 
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
     {
         $cardInfo = $this->viewCardsInfo();
         // dd($cardInfo);
+        // $route = Route::getCurrentRoute();
         return view('user.dashboard.index', compact('cardInfo'));
     }
     public function viewActivities()

@@ -102,12 +102,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="side-menu__title"> Overview </div>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="inbox"></i> </div>
                         <div class="side-menu__title"> My Team </div>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="side-nav__devider my-6"></li>
                 <li>
@@ -131,7 +131,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gauge.js/1.3.6/gauge.min.js"></script>
-
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/tabs.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -189,6 +189,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="{{ asset('dashboard-dist/dist/js/daily-appointments-fixed-chart.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-organizations-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
+
 
 </body>
 

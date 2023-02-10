@@ -2,8 +2,19 @@
     <!-- BEGIN: Breadcrumb -->
     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Application</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Application</a></li>
+            @switch(Route::currentRouteName())
+                @case('user.activities')
+                    <li class="breadcrumb-item active" aria-current="page">Activities</li>
+                @break
+
+                @case('user.dashboard')
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                @break
+
+                @default
+            @endswitch
+
         </ol>
     </nav>
     <!-- END: Breadcrumb -->
