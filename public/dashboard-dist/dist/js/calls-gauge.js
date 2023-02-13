@@ -148,6 +148,7 @@ if (goalsOnly == true) {
         gauge.set(0); // set actual value
     }
 } {
+    console.log("goal ids", goalsIDs);
     for (let index = 0; index < goalsIDs.length; index++) {
         var goalCalls = goalsData[index].calls;
         if (typeof goalsData[index] == "undefined") {
@@ -219,10 +220,14 @@ if (goalsOnly == true) {
         };
 
         var target = document.getElementById('calls-gauge' + goalsIDs[index]); // your canvas element
+        // console.log("target", target);
+        target.clientWidth = 200;
+        target.clientHeight = 300;
         var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
         gauge.maxValue = goalCalls; // set max gauge value
         gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
         gauge.animationSpeed = 32; // set animation speed (32 is default value)
+        console.log("gauge>", gauge);
         // console.log("calls>", calls[index]);
         if (typeof calls[index] !== "undefined") {
             gauge.set(calls[index].total_calls); // set actual value
