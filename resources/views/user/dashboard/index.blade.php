@@ -124,21 +124,45 @@
                                 data-tabs="tabs" role="list">
                                 @foreach ($cardInfo['goals'] as $key => $goalList)
                                     @if ($key == 0)
-                                        <li class="z-30 flex-auto text-center">
-                                            <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
-                                                data-tab-target="" active="" role="tab" aria-selected="true"
-                                                aria-controls="g{{ $goalList->id }}">
-                                                <span class="ml-1">{{ $goalList->name }}</span>
-                                            </a>
-                                        </li>
+                                        @if (isset($cardInfo['fupEntryData'][$key]['total_calls']))
+                                            <li class="z-30 flex-auto text-center goal-Tab"
+                                                onclick="displaySelectedGauge({{ $goalList->id }},{{ $cardInfo['entryData'][$key]['total_calls'] }},{{ $goalList->calls }},{{ $cardInfo['fupEntryData'][$key]['total_calls'] }},{{ $goalList->calls }})">
+                                                <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
+                                                    data-tab-target="" active="" role="tab" aria-selected="true"
+                                                    aria-controls="g{{ $goalList->id }}">
+                                                    <span class="ml-1">{{ $goalList->name }}</span>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="z-30 flex-auto text-center goal-Tab"
+                                                onclick="displaySelectedGauge({{ $goalList->id }},{{ $cardInfo['entryData'][$key]['total_calls'] }},{{ $goalList->calls }},0,{{ $goalList->calls }})">
+                                                <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
+                                                    data-tab-target="" active="" role="tab" aria-selected="true"
+                                                    aria-controls="g{{ $goalList->id }}">
+                                                    <span class="ml-1">{{ $goalList->name }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
                                     @else
-                                        <li class="z-30 flex-auto text-center">
-                                            <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
-                                                data-tab-target="" active="" role="tab" aria-selected="false"
-                                                aria-controls="g{{ $goalList->id }}">
-                                                <span class="ml-1">{{ $goalList->name }}</span>
-                                            </a>
-                                        </li>
+                                        @if (isset($cardInfo['fupEntryData'][$key]['total_calls']))
+                                            <li class="z-30 flex-auto text-center goal-Tab"
+                                                onclick="displaySelectedGauge({{ $goalList->id }},{{ $cardInfo['entryData'][$key]['total_calls'] }},{{ $goalList->calls }},{{ $cardInfo['fupEntryData'][$key]['total_calls'] }},{{ $goalList->calls }})">
+                                                <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
+                                                    data-tab-target="" active="" role="tab" aria-selected="false"
+                                                    aria-controls="g{{ $goalList->id }}">
+                                                    <span class="ml-1">{{ $goalList->name }}</span>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li class="z-30 flex-auto text-center goal-Tab"
+                                                onclick="displaySelectedGauge({{ $goalList->id }},{{ $cardInfo['entryData'][$key]['total_calls'] }},{{ $goalList->calls }},0,{{ $goalList->calls }})">
+                                                <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
+                                                    data-tab-target="" active="" role="tab" aria-selected="false"
+                                                    aria-controls="g{{ $goalList->id }}">
+                                                    <span class="ml-1">{{ $goalList->name }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
                                     @endif
                                 @endforeach
                             </ul>
@@ -153,14 +177,29 @@
                                                 <span class="block mx-auto mt-2 font-bold text-start p-2"
                                                     style="font-size: 20px">Daily Organizations Attempted
                                                 </span>
-                                                <div class="w-full z-50" style="margin-top:100px">
+                                                <div class="w-full z-50" style="margin-top:20px">
                                                     <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">Daily
                                                         Organizations Reached
                                                     </span>
                                                 </div>
-
+                                                <div class="side-nav__devider my-6"></div>
+                                                <hr>
+                                                {{-- Calls Attempts Chart --}}
+                                                <span class="block mx-auto mt-4 font-bold text-start p-2"
+                                                    style="font-size: 20px">Daily
+                                                    Call Attempts
+                                                </span>
+                                                <div class="w-full z-50" style="margin-top:20px">
+                                                    <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
+                                                    <div id="preview-textfield"></div>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily
+                                                        Calls
+                                                        Average
+                                                    </span>
+                                                </div>
+                                                {{-- Calls Attempts Chart End --}}
                                             </div>
                                             {{-- ORGANIZATION CHART END --}}
                                             {{-- NAP GAUGE 2 --}}
@@ -171,24 +210,24 @@
                                                     style="font-size: 20px">Calls
                                                     Countdown
                                                 </span>
-                                                <div class="w-full" style="margin-top:50px">
+                                                <div class="w-full gauge-container">
                                                     <canvas class="callsgauge justify-center"
                                                         id="calls-gauge{{ $goal->id }}"
                                                         style=" display: block;
-                                                            margin: 0 auto;margin-top:50px"></canvas>
+                                                            margin: 0 auto;"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
                                                 </div>
                                             </div>
                                             {{-- NAP GAUGE 2 END --}}
-                                            {{-- CHART --}}
+                                            {{-- CHART
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                                 <span class="block mx-auto mt-2 font-bold text-start p-2"
                                                     style="font-size: 20px">Daily
                                                     Call Attempts
                                                 </span>
-                                                <div class="w-full z-50" style="margin-top:100px">
+                                                <div class="w-full z-50" style="margin-top:20px">
                                                     <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">Daily
@@ -196,27 +235,8 @@
                                                         Average
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             {{-- CHART END --}}
-                                            {{-- FUP GAUGE 1 --}}
-                                            <div
-                                                class="col-span-12 sm:col-span-12 xl:col-span-8 intro-y box p-5 zoom-in z-0">
-                                                {{-- <div class="report-box "> --}}
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
-                                                    style="font-size: 20px">FUP
-                                                    Calls Countdown
-                                                </span>
-                                                <div class="w-full">
-                                                    <canvas class="justify-center callsgauge"
-                                                        id="fup-calls-gauge{{ $goal->id }}"
-                                                        style=" display: block;
-                                                            margin: 0 auto; width:95%;margin-top:50px"></canvas>
-                                                    <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
-                                                </div>
-                                                {{-- </div> --}}
-                                            </div>
-                                            {{-- FUP GAUGE 1 END --}}
                                             {{-- APPOINTMENTS FIXED CHART --}}
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
@@ -225,7 +245,7 @@
                                                     Pitch
                                                     Progress
                                                 </span>
-                                                <div class="w-full z-50" style="margin-top:100px">
+                                                <div class="w-full z-50" style="margin-top:20px">
                                                     <canvas
                                                         id="daily-appointments-fixed-chart{{ $goal->id }}"></canvas>
                                                     <div id="preview-textfield"></div>
@@ -299,19 +319,19 @@
                                                                 </div>
                                                             </div>
                                                             {{-- <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                                                    style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;display: flex;
-                                                                    align-items: center;
-                                                                    justify-content: center;
-                                                                "
-                                                                    id="bar{{ $goal->id }}">
-                                                                    <span
-                                                                        class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mt-2"
-                                                                        style=" text-align: center;
-                                                                        width: 100%;">
-                                                                        Organizations Reached:
-                                                                        {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
-                                                                    </span>
-                                                                </div> --}}
+                                                                  style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;display: flex;
+                                                                  align-items: center;
+                                                                  justify-content: center;
+                                                              "
+                                                                  id="bar{{ $goal->id }}">
+                                                                  <span
+                                                                      class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mt-2"
+                                                                      style=" text-align: center;
+                                                                      width: 100%;">
+                                                                      Organizations Reached:
+                                                                      {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
+                                                                  </span>
+                                                              </div> --}}
                                                         @else
                                                             <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
                                                                 style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
@@ -327,6 +347,25 @@
                                                 </div>
                                             </div>
                                             {{-- PROGRESS END --}}
+                                            {{-- FUP GAUGE 1 --}}
+                                            <div
+                                                class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                                {{-- <div class="report-box "> --}}
+                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
+                                                    style="font-size: 20px">FUP
+                                                    Calls Countdown
+                                                </span>
+                                                <div class="w-full">
+                                                    <canvas class="justify-center"
+                                                        id="fup-calls-gauge{{ $goal->id }}"
+                                                        style=" display: block;
+                                                            margin: 0 auto; width:95%;margin-top:50px"></canvas>
+                                                    <div id="preview-textfield"></div>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                                </div>
+                                                {{-- </div> --}}
+                                            </div>
+                                            {{-- FUP GAUGE 1 END --}}
 
                                             {{-- GOAL CARD --}}
                                             <div
@@ -449,11 +488,24 @@
                                                 <span class="block mx-auto mt-2 font-bold text-start p-2"
                                                     style="font-size: 20px">Organization Accomplishments Report
                                                 </span>
-                                                <div class="w-full z-50" style="margin-top:100px">
+                                                <div class="w-full z-50" style="margin-top:20px">
                                                     <canvas id="daily-organizations-reached{{ $goal->id }}"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">Daily
                                                         Organizations Reached
+                                                    </span>
+                                                </div>
+                                                <div class="side-nav__devider my-6"></div>
+                                                <hr>
+                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                                    style="font-size: 20px">Daily
+                                                    Calls Graph
+                                                </span>
+                                                <div class="w-full z-50" style="margin-top:20px">
+                                                    <canvas id="daily-entry-chat{{ $goal->id }}"></canvas>
+                                                    <div id="preview-textfield"></div>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2">Daily
+                                                        Call Attempts
                                                     </span>
                                                 </div>
                                             </div>
@@ -477,7 +529,7 @@
                                             </div>
                                             {{-- NAP GAUGE 2 END --}}
                                             {{-- CHART --}}
-                                            <div
+                                            {{-- <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
                                                 <span class="block mx-auto mt-2 font-bold text-start p-2"
                                                     style="font-size: 20px">Daily
@@ -491,37 +543,17 @@
                                                         Average
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             {{-- CHART END --}}
-                                            {{-- FUP GAUGE 1 --}}
-                                            <div
-                                                class="col-span-12 sm:col-span-12 xl:col-span-8 intro-y box p-5 zoom-in z-0">
-                                                {{-- <div class="report-box "> --}}
-                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
-                                                    style="font-size: 20px">FUP
-                                                    Calls Countdown
-                                                </span>
-                                                <div class="w-full">
-                                                    <canvas class="justify-center callsgauge"
-                                                        id="fup-calls-gauge{{ $goal->id }}"
-                                                        style=" display: block;
-              margin: 0 auto; width:95%;margin-top:50px"></canvas>
-                                                    <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
-                                                </div>
-                                                {{-- </div> --}}
-                                            </div>
-                                            {{-- FUP GAUGE 1 END --}}
-
                                             {{-- APPOINTMENTS FIXED CHART --}}
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
                                                     style="font-size: 20px">Daily
                                                     Pitch
                                                     Progress
                                                 </span>
-                                                <div class="w-full z-50" style="margin-top:100px">
+                                                <div class="w-full z-50" style="margin-top:20px">
                                                     <canvas
                                                         id="daily-appointments-fixed-chart{{ $goal->id }}"></canvas>
                                                     <div id="preview-textfield"></div>
@@ -596,19 +628,19 @@
                                                                 </div>
                                                             </div>
                                                             {{-- <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
-                                                                    style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;display: flex;
-                                                                    align-items: center;
-                                                                    justify-content: center;
-                                                                "
-                                                                    id="bar{{ $goal->id }}">
-                                                                    <span
-                                                                        class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mt-2"
-                                                                        style=" text-align: center;
-                                                                        width: 100%;">
-                                                                        Organizations Reached:
-                                                                        {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
-                                                                    </span>
-                                                                </div> --}}
+                                                                        style="width:{{ ($cardInfo['entryData'][$index]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;display: flex;
+                                                                        align-items: center;
+                                                                        justify-content: center;
+                                                                    "
+                                                                        id="bar{{ $goal->id }}">
+                                                                        <span
+                                                                            class="w-full text-center text-xs xl:text-sm xl:font-sm font-medium text-blue-100 mt-2"
+                                                                            style=" text-align: center;
+                                                                            width: 100%;">
+                                                                            Organizations Reached:
+                                                                            {{ $cardInfo['entryData'][$index]->total_organizations_reached }}
+                                                                        </span>
+                                                                    </div> --}}
                                                         @else
                                                             <div class="bg-blue-600  rounded-lg text-xs font-medium text-blue-100 text-center p-2 leading-none"
                                                                 style="width:0%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px">
@@ -624,8 +656,25 @@
                                                 </div>
                                             </div>
                                             {{-- PROGRESS END --}}
-
-
+                                            {{-- FUP GAUGE 1 --}}
+                                            <div
+                                                class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
+                                                {{-- <div class="report-box "> --}}
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
+                                                    style="font-size: 20px">FUP
+                                                    Calls Countdown
+                                                </span>
+                                                <div class="w-full">
+                                                    <canvas class="justify-center"
+                                                        id="fup-calls-gauge{{ $goal->id }}"
+                                                        style=" display: block;
+              margin: 0 auto; width:95%;margin-top:50px;height:200px"></canvas>
+                                                    <div id="preview-textfield"></div>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                                </div>
+                                                {{-- </div> --}}
+                                            </div>
+                                            {{-- FUP GAUGE 1 END --}}
                                             {{-- GOAL CARD --}}
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-12 intro-y box p-5 zoom-in z-0">
@@ -1370,8 +1419,12 @@
         }
 
         .callsgauge {
-            width: 400px;
-            height: 220px;
+            width: 550px;
+            height: 320px;
+        }
+
+        .gauge-container {
+            margin-top: 100px;
         }
 
         #calls-gauge {
