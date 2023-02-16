@@ -40,10 +40,21 @@ class AdminController extends Controller
         // $user->update();
         return redirect('admin/teams');
     }
+
+    public function deleteGoal(Request $req)
+    {
+        $goal = OrganizationGoal::find($req->input('goal_id'));
+        if ($goal) {
+            $goal->delete();
+        } else {
+            return redirect()->back()->with('error', 'Unable to Delete Goal');
+        }
+        return redirect()->back()->with('message', 'Goal Deleted Successfully');
+    }
     public function viewGoals()
     {
         $kpis = KPI::all();
-        $goals = OrganizationGoal::paginate(10);
+        $goals = OrganizationGoal::orderByDesc('created_at')->paginate(10);
         return view('admin.dashboard.goals', compact('kpis', 'goals'));
     }
     public function addGoals(Request $request)

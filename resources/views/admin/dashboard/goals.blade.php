@@ -74,9 +74,9 @@
                                 </div>
                                 <div class="col-span-4">
                                     <label for="regular-form-1" class="form-label">Select Start Date</label>
-                                    <input type="text" class="form-control datepicker block col-span-4" name="org_goal_start_date"
-                                        placeholder="Select Starting Date for the Goal" data-single-mode="true"
-                                        aria-label="default input inline 2">
+                                    <input type="text" class="form-control datepicker block col-span-4"
+                                        name="org_goal_start_date" placeholder="Select Starting Date for the Goal"
+                                        data-single-mode="true" aria-label="default input inline 2">
                                 </div>
                             </div>
                         </div>
@@ -189,53 +189,35 @@
                                     <div class="flex  items-center">
                                         <a class="flex bg btn btn-warning  mr-3" href=""> <i
                                                 data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                        <a class="flex mr-3 btn btn-danger" href=""> <i data-feather="trash-2"
-                                                class="w-4 h-4 mr-1"></i> Delete </a>
-                                        <a class="flex mr-3 btn btn-primary" href="javascript:;" data-tw-toggle="modal"
+                                        <a class="flex mr-3 btn btn-danger" data-tw-toggle="modal"
+                                            data-tw-target="#delete-modal-preview-{{ $key }}"
+                                            href="javascript:;">
+                                            <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                        {{-- <a class="flex mr-3 btn btn-primary" href="javascript:;" data-tw-toggle="modal"
                                             data-tw-target="#team-modal-preview-{{ $key }}"> <i
-                                                data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a>
-
+                                                data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a> --}}
                                     </div>
                                 </td>
-                                <div id="team-modal-preview-{{ $key }}" class="modal" tabindex="-1"
+                                <div id="delete-modal-preview-{{ $key }}" class="modal" tabindex="-1"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form action="{{ route('admin.teams.assign.user') }}" method="post">
+                                            <form action="{{ route('admin.goals.delete') }}" method="post">
                                                 @csrf
                                                 @method('POST')
                                                 <div class="modal-body">
-                                                    <div class="w-full"> <label for="modal-form-6"
-                                                            class="form-label font-bold">Add an
-                                                            Activity</label>
-
-                                                        {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
-                                                        <div>
-                                                            <div class="mt-2">
-                                                                Select Date:
-                                                                <div class="relative w-full mx-auto mt-2">
-                                                                    <div
-                                                                        class="absolute rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500 dark:bg-darkmode-700 dark:border-darkmode-800 dark:text-slate-400">
-                                                                        <i data-feather="calendar" class="w-4 h-4"></i>
-                                                                    </div> <input type="text"
-                                                                        class="datepicker form-control pl-12"
-                                                                        data-single-mode="true" name="activity_date">
-                                                                </div>
-                                                                <div class="relative w-full mx-auto mt-2">
-                                                                    <div> <label for="regular-form-1"
-                                                                            class="form-label">Select
-                                                                            Title</label> <input id="regular-form-1"
-                                                                            type="text" class="form-control"
-                                                                            name="title">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div class="p-5 text-center"> <i data-feather="x-circle"
+                                                            class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                                                        <div class="text-3xl mt-5">Are you sure?</div>
+                                                        <div class="text-slate-500 mt-2"> Are you sure you want to delete
+                                                            this goal?</div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer"> <button type="button" data-tw-dismiss="modal"
-                                                        class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
-                                                    <input type="submit" class="btn btn-primary w-20" value="Add">
+                                                    <input type="hidden" name="goal_id" value="{{ $goal->id }}">
+                                                    <div class="px-5 pb-8 text-center"> <button type="button"
+                                                            data-tw-dismiss="modal"
+                                                            class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                                                        <input type="submit" class="btn btn-danger w-20" value="Delete">
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

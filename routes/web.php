@@ -34,7 +34,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth'
     Route::get('/activities', [UserController::class, 'viewActivities'])->name('activities');
 
     Route::post('/activities/add', [UserController::class, 'addEntry'])->name('entry.add');
-    Route::post('/activities/fup/add',[UserController::class, 'addFUPEntry'])->name('entryfup.add');
+    Route::post('/activities/fup/add', [UserController::class, 'addFUPEntry'])->name('entryfup.add');
 
 });
 
@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/teams', [AdminController::class, 'viewTeams'])->name('teams');
     Route::post('/teams/add', [TeamController::class, 'store'])->name('teams.add');
     Route::post('/team/assign', [AdminController::class, 'addUserToTeam'])->name('teams.assign.user');
+    Route::post('/goals/delete', [AdminController::class, 'deleteGoal'])->name('goals.delete');
     Route::get('/goals', [AdminController::class, 'viewGoals'])->name('goals');
     Route::post('/goals/add', [AdminController::class, 'addGoals'])->name('goals.add');
 
