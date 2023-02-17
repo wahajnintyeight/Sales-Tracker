@@ -17,7 +17,7 @@ class TeamFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->title(),
+            'name' => fake()->jobTitle(),
             'members_count' => 2
         ];
     }

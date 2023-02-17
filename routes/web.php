@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('/teams/add', [TeamController::class, 'store'])->name('teams.add');
     Route::post('/team/assign', [AdminController::class, 'addUserToTeam'])->name('teams.assign.user');
     Route::post('/goals/delete', [AdminController::class, 'deleteGoal'])->name('goals.delete');
+    Route::post('/teams/delete', [AdminController::class, 'deleteTeam'])->name('teams.delete');
     Route::get('/goals', [AdminController::class, 'viewGoals'])->name('goals');
     Route::post('/goals/add', [AdminController::class, 'addGoals'])->name('goals.add');
 

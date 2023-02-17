@@ -68,7 +68,7 @@
                                 <label for="regular-form-1" class="form-label">Performed On</label>
                                 <input type="text" class="form-control datepicker block" name="performed_on"
                                     placeholder="Select Deadline" aria-label="default input inline 3"
-                                    data-single-mode="true">
+                                    data-single-mode="true" value="{{ old('performed_on', date('Y-m-d')) }}">
                             </div>
                         </div>
 

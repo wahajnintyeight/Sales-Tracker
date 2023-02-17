@@ -14,7 +14,8 @@ return new class extends Migration {
     {
         Schema::create('organization_entries', function (Blueprint $table) {
             $table->id();
-            $table->integer("organization_goal_id");
+            $table->unsignedBigInteger("organization_goal_id");
+            $table->foreign("organization_goal_id")->references('id')->on('organization_goals')->onDelete('cascade');
             $table->integer("calls")->default(0)->nullable();
             $table->integer("user_id");
             $table->date("performed_on");

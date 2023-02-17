@@ -74,88 +74,14 @@
                                     <div class="flex  items-center">
                                         <a class="flex  btn btn-primary mr-1" href=""> <i data-feather="check-square"
                                                 class="w-4 h-4 mr-1"></i> Edit </a>
-                                        <a class="flex btn btn-danger mr-1" href=""> <i data-feather="trash-2"
-                                                class="w-4 h-4 mr-1"></i> Delete </a>
-                                        <a class="flex btn bg btn-warning mr-1" href="javascript:;" data-tw-toggle="modal"
+                                        <a class="flex btn btn-danger mr-1" data-tw-toggle="modal" href="javascript:;"
                                             data-tw-target="#team-modal-preview-{{ $key }}"> <i
-                                                data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a>
+                                                data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                        {{-- <a class="flex btn bg btn-warning mr-1" href="javascript:;" data-tw-toggle="modal"
+                                            data-tw-target="#team-modal-preview-{{ $key }}"> <i
+                                                data-feather="activity" class="w-4 h-4 mr-1"></i> Add Activity </a> --}}
                                         <!-- BEGIN: Modal Toggle -->
 
-                                        {{-- <div id="header-footer-modal-preview{{ $key }}" class="modal"
-                                            tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <!-- BEGIN: Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h2 class="font-medium text-base mr-auto">Broadcast Message</h2>
-                                                        <button class="btn btn-outline-secondary hidden sm:flex"> <i
-                                                                data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs
-                                                        </button>
-                                                        <div class="dropdown sm:hidden"> <a
-                                                                class="dropdown-toggle w-5 h-5 block" href="javascript:;"
-                                                                aria-expanded="false" data-tw-toggle="dropdown"> <i
-                                                                    data-feather="more-horizontal"
-                                                                    class="w-5 h-5 text-slate-500"></i> </a>
-                                                            <div class="dropdown-menu w-40">
-                                                                <ul class="dropdown-content">
-                                                                    <li> <a href="javascript:;" class="dropdown-item"> <i
-                                                                                data-feather="file"
-                                                                                class="w-4 h-4 mr-2"></i> Download Docs </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- END: Modal Header -->
-                                                    <!-- BEGIN: Modal Body -->
-                                                    <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                                                        <div class="col-span-12 sm:col-span-6"> <label
-                                                                for="modal-form-1{{ $key }}"
-                                                                class="form-label">From</label> <input
-                                                                id="modal-form-1{{ $key }}" type="text"
-                                                                class="form-control" placeholder="example@gmail.com">
-                                                        </div>
-                                                        <div class="col-span-12 sm:col-span-6"> <label
-                                                                for="modal-form-2{{ $key }}"
-                                                                class="form-label">To</label> <input
-                                                                id="modal-form-2{{ $key }}" type="text"
-                                                                class="form-control" placeholder="example@gmail.com">
-                                                        </div>
-                                                        <div class="col-span-12 sm:col-span-6"> <label
-                                                                for="modal-form-3{{ $key }}"
-                                                                class="form-label">Subject</label> <input
-                                                                id="modal-form-3{{ $key }}" type="text"
-                                                                class="form-control" placeholder="Important Meeting">
-                                                        </div>
-                                                        <div class="col-span-12 sm:col-span-6"> <label
-                                                                for="modal-form-4{{ $key }}"
-                                                                class="form-label">Has the Words</label> <input
-                                                                id="modal-form-4" type="text" class="form-control"
-                                                                placeholder="Job, Work, Documentation"> </div>
-                                                        <div class="col-span-12 sm:col-span-6"> <label
-                                                                for="modal-form-5{{ $key }}"
-                                                                class="form-label">Doesn't Have</label> <input
-                                                                id="modal-form-5{{ $key }}" type="text"
-                                                                class="form-control"
-                                                                placeholder="Job, Work, Documentation"> </div>
-                                                        <div class="col-span-12 sm:col-span-6"> <label
-                                                                for="modal-form-6{{ $key }}"
-                                                                class="form-label">Size</label> <select
-                                                                id="modal-form-6{{ $key }}" class="form-select">
-                                                                <option>10</option>
-                                                                <option>25</option>
-                                                                <option>35</option>
-                                                                <option>50</option>
-                                                            </select> </div>
-                                                    </div> <!-- END: Modal Body -->
-                                                    <!-- BEGIN: Modal Footer -->
-                                                    <div class="modal-footer"> <button type="button"
-                                                            data-tw-dismiss="modal"
-                                                            class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
-                                                        <button type="button" class="btn btn-primary w-20">Send</button>
-                                                    </div> <!-- END: Modal Footer -->
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         <!-- BEGIN: Modal Toggle -->
                                         <!-- BEGIN: Modal Content -->
                                         <!-- END: Modal Content -->
@@ -165,44 +91,22 @@
                                     aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form action="{{ route('admin.teams.assign.user') }}" method="post">
+                                            <form action="{{ route('admin.teams.delete') }}" method="post">
                                                 @csrf
                                                 @method('POST')
                                                 <div class="modal-body">
-                                                    <div class="w-full"> <label for="modal-form-6"
-                                                            class="form-label font-bold">Add an
-                                                            Activity</label>
-
-                                                        {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
-                                                        <div>
-                                                            <div class="mt-2">
-                                                                Select Date:
-                                                                <div class="relative w-full mx-auto mt-2">
-                                                                    <div
-                                                                        class="absolute rounded-l w-10 h-full flex items-center justify-center bg-slate-100 border text-slate-500 dark:bg-darkmode-700 dark:border-darkmode-800 dark:text-slate-400">
-                                                                        <i data-feather="calendar" class="w-4 h-4"></i>
-                                                                    </div> <input type="text"
-                                                                        class="datepicker form-control pl-12"
-                                                                        data-single-mode="true" name="activity_date">
-                                                                </div>
-                                                                <div class="relative w-full mx-auto mt-2">
-                                                                    <div> <label for="regular-form-1"
-                                                                            class="form-label">Select Title</label> <input
-                                                                            id="regular-form-1" type="text"
-                                                                            class="form-control" name="title">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{-- <select id="modal-form-6" class="form-select w-full" name="team_id"> --}}
-
-                                                        {{-- </select> --}}
-
+                                                    <div class="p-5 text-center"> <i data-feather="x-circle"
+                                                            class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                                                        <div class="text-3xl mt-5">Are you sure?</div>
+                                                        <div class="text-slate-500 mt-2"> Are you sure you want to delete
+                                                            this team?</div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer"> <button type="button" data-tw-dismiss="modal"
-                                                        class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
-                                                    <input type="submit" class="btn btn-primary w-20" value="Add">
+                                                    <input type="hidden" name="team_id" value="{{ $team->id }}">
+                                                    <div class="px-5 pb-8 text-center"> <button type="button"
+                                                            data-tw-dismiss="modal"
+                                                            class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                                                        <input type="submit" class="btn btn-danger w-20" value="Delete">
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

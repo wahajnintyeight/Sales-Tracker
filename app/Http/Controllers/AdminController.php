@@ -57,6 +57,16 @@ class AdminController extends Controller
         $goals = OrganizationGoal::orderByDesc('created_at')->paginate(10);
         return view('admin.dashboard.goals', compact('kpis', 'goals'));
     }
+    public function deleteTeam(Request $req)
+    {
+        $team = Team::find($req->input('team_id'));
+        if ($team) {
+            $team->delete();
+        } else {
+            return redirect()->back()->with('error', 'Unable to Delete Team');
+        }
+        return redirect()->back()->with('message', 'Team Deleted Successfully');
+    }
     public function addGoals(Request $request)
     {
         // dd($request);

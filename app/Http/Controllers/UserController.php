@@ -34,6 +34,7 @@ class UserController extends Controller
         $entries->calls = $request->org_calls;
         // $entries
         $entries->user_id = $request->user_id;
+        $entries->performed_on =Carbon::createFromFormat('d M, Y', $request->performed_on)->format('Y-m-d');
         $entries->pitches = $request->org_actual_appointments == null ? 0 : $request->org_actual_appointments;
         $entries->fixed_apt = $request->org_fixed_appointments == null ? 0 : $request->org_fixed_appointments;
         $entries->organizations_reached = $request->org_organizations_reached == null ? 0 : $request->org_organizations_reached;
