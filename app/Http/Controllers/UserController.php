@@ -16,8 +16,9 @@ class UserController extends Controller
     public function viewDashboard()
     {
         $cardInfo = $this->viewCardsInfo();
-        // dd($cardInfo);
+        // dd($cardInfo['goals'][0]['entryData']);
         // $route = Route::getCurrentRoute();
+
         return view('user.dashboard.index', compact('cardInfo'));
     }
     public function viewActivities()
@@ -34,7 +35,7 @@ class UserController extends Controller
         $entries->calls = $request->org_calls;
         // $entries
         $entries->user_id = $request->user_id;
-        $entries->performed_on =Carbon::createFromFormat('d M, Y', $request->performed_on)->format('Y-m-d');
+        $entries->performed_on = Carbon::createFromFormat('d M, Y', $request->performed_on)->format('Y-m-d');
         $entries->pitches = $request->org_actual_appointments == null ? 0 : $request->org_actual_appointments;
         $entries->fixed_apt = $request->org_fixed_appointments == null ? 0 : $request->org_fixed_appointments;
         $entries->organizations_reached = $request->org_organizations_reached == null ? 0 : $request->org_organizations_reached;
@@ -52,6 +53,7 @@ class UserController extends Controller
         // $entries
         $entries->user_id = $request->user_id;
         $entries->is_fup = 1;
+        $entries->performed_on = Carbon::createFromFormat('d M, Y', $request->performed_on)->format('Y-m-d');
         $entries->organizations_reached = $request->org_pitches;
         $entries->organization_goal_id = $request->goal_id;
 
@@ -82,10 +84,12 @@ class UserController extends Controller
             'totalPitchesMade' => 0
         ];
         $kpi = KPI::find(1); //FETCH Organization KPI
+        $entryCount = 0;
         if ($kpi != null) { //If KPI exists 
 
 
             $organizationGoals = $kpi->organizationGoal->where('is_completed', 0); //Fetch all goals for Organization
+            // dd($organizationGoals[1]->id);
             if (count($organizationGoals) > 0) { //if user has at least one goal 
                 $entries = collect();
                 $goalStartDate = 0;
@@ -97,14 +101,25 @@ class UserController extends Controller
                 $totalCallsMade = array(0);
                 $totalPitchesMade = array(0);
                 $index = 0;
-                $entryData = OrganizationEntry::where('user_id', Auth::user()->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_organizations_reached'), DB::raw('SUM(pitches) as total_pitches'), DB::raw('SUM(fixed_apt) as appointments_fixed'))
-                    ->groupBy('organization_goal_id')
-                    ->get();
-                $fupEntryData = OrganizationEntry::where('is_fup', 1)->where('user_id', Auth::user()->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_organizations_reached'), DB::raw('SUM(fixed_apt) as appointments_fixed'))
-                    ->groupBy('organization_goal_id')
-                    ->get();
+
+                foreach ($organizationGoals as $goalInd => $orgGoal) {
+                    // dd($orgGoal-);
+                    $entryData = OrganizationEntry::where('user_id', Auth::user()->id)->where('is_fup', 0)->where('organization_goal_id', $orgGoal->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_organizations_reached'), DB::raw('SUM(pitches) as total_pitches'), DB::raw('SUM(fixed_apt) as appointments_fixed'))
+                        ->groupBy('organization_goal_id')
+                        ->get();
+                    if (count($entryData) > 0) {
+                        $entryCount = $entryCount + 1;
+                    }
+                    $organizationGoals[$goalInd]['entryData'] = $entryData;
+                    // dd($organizationGoals);
+                    $fupEntryData = OrganizationEntry::where('is_fup', 1)->where('user_id', Auth::user()->id)->where('organization_goal_id', $orgGoal->id)->select('organization_goal_id', DB::raw('SUM(calls) as total_calls'), DB::raw('SUM(organizations_reached) as total_organizations_reached'), DB::raw('SUM(fixed_apt) as appointments_fixed'))
+                        ->groupBy('organization_goal_id')
+                        ->get();
+                    $organizationGoals[$goalInd]['fupEntryData'] = $fupEntryData;
+                }
+                // $goalIndex++;
                 $goalIDs = array(0);
-                if (count($entryData) > 0) {
+                if ($entryCount > 0) {
                     foreach ($organizationGoals as $i => $goal) {
                         $goalStartDate = $goal->goal_start_date;
                         $goalEndDate = $goal->deadline;
@@ -150,8 +165,11 @@ class UserController extends Controller
 
                         // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->get();
                         // $entriesInMonth = OrganizationEntry::where(DB::raw('MONTH(performed_on)'), $monthNum)->where(DB::raw('YEAR(performed_on)'), $yearNum)->groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(organizations_reached) as organizations_reached')->get();
-                        $entriesInMonth = OrganizationEntry::groupBy('performed_on')->selectRaw('performed_on, sum(calls) as calls, sum(organizations_reached) as organizations_reached, sum(pitches) as pitches, sum(fixed_apt) as appointments_fixed, sum(fixed_apt) as appointments_fixed')->get(); // dd($entriesInMonth);
+
+                        $entriesInMonth = OrganizationEntry::groupBy('performed_on')->where('organization_goal_id', $goal->id)->where('user_id', Auth::user()->id)->selectRaw('performed_on, sum(calls) as calls, sum(organizations_reached) as organizations_reached, sum(pitches) as pitches, sum(fixed_apt) as appointments_fixed, sum(fixed_apt) as appointments_fixed')->get(); // dd($entriesInMonth);
                         // Fetch monthly data (current month)
+                        // dd($entriesInMonth);
+
                         foreach ($entriesInMonth as $em) {
                             $totalCallsMadeMonth += $em->calls;
                             $totalPitchesMadeMonth += $em->organizations_reached;
@@ -214,12 +232,6 @@ class UserController extends Controller
                             }
                         }
 
-                        if (count($entriesInMonth) > 0) {
-                            $avgEntr = ($totalCallsMadeMonth + $totalPitchesMadeMonth) / count($entriesInMonth);
-
-                        } else {
-                            $avgEntr = 0;
-                        }
                         $callsPerDays[$i] = $temp_callsPerDays;
                         $pitchesPerDays[$i] = $temp_pitchesPerDays;
                         $organizationReachedPerDays[$i] = $temp_orgRchdPerDays;
@@ -229,13 +241,14 @@ class UserController extends Controller
 
                     $cards = [
                         'entries' => $entries,
-                        'avgEntries' => $avgEntr,
+
                         'totalCallsMadeMonth' => $totalCallsMadeMonth,
                         'callsEachDay' => $callsPerDays,
                         'callsDates' => $goalDateRange,
                         'pitchesEachDay' => $pitchesPerDays,
                         'organizationsReachedEachDay' => $organizationReachedPerDays,
                         'goalIDs' => $goalIDs,
+                        'entryCount' => $entryCount,
                         'pitchesDates' => $goalDateRange,
                         'appointmentsFixed' => $fixedAppointmentPerDays,
                         'totalPitchesMadeMonth' => $totalPitchesMadeMonth,
@@ -250,7 +263,7 @@ class UserController extends Controller
                 } else {
                     $cards['goals'] = $organizationGoals;
                     $cards['goalsOnly'] = true;
-
+                    $cards['entryCount'] = $entryCount;
                     $cards['goalIDs'] = $goalIDs;
                     // dd($cards);
                     // $cards['onlyGoals'] = 

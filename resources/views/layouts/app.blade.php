@@ -41,63 +41,63 @@
                             class="w-full p-6 lg:p-0 bg-white bg-opacity-40 backdrop-blur-md lg:items-center flex flex-col lg:flex-row lg:bg-transparent transition-all ease-in">
                             @if (Auth::user())
 
-                            @if (Auth::user()->role_id == 0)
-                            <ul
-                                class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
-                                <li class="flex w-full lg:max-w-max justify-center">
-                                    <a href="{{ route('user.dashboard') }}"
-                                        class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
-                                        <span
-                                            class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
-                                            Dashboard
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            @elseif(Auth::user()->role_id == 1)
-                            <ul
-                                class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
-                                <li class="flex w-full lg:max-w-max justify-center">
-                                    <a href="{{ route('admin.dashboard') }}"
-                                        class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
-                                        <span
-                                            class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
-                                            Dashboard
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
+                                @if (Auth::user()->role_id == 0)
+                                    <ul
+                                        class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+                                        <li class="flex w-full lg:max-w-max justify-center">
+                                            <a href="{{ route('user.dashboard') }}"
+                                                class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                                <span
+                                                    class="block text-sm text-black text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                    Dashboard
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @elseif(Auth::user()->role_id == 1)
+                                    <ul
+                                        class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+                                        <li class="flex w-full lg:max-w-max justify-center">
+                                            <a href="{{ route('admin.dashboard') }}"
+                                                class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                                <span
+                                                    class="block text-sm text-black text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                    Dashboard
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @else
+                                    <ul
+                                        class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+
+
+                                        <li class="flex w-full lg:max-w-max justify-center">
+                                            <a href="{{ route('user-login-index') }}"
+                                                class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                                <span
+                                                    class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                    Sign In
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @endif
                             @else
-                            <ul
-                                class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
+                                <ul
+                                    class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
 
 
-                                <li class="flex w-full lg:max-w-max justify-center">
-                                    <a href="{{ route('user-login-index') }}"
-                                        class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
-                                        <span
-                                            class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
-                                            Sign In
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            @endif
-                            @else
-                            <ul
-                                class="border-t w-full lg:w-max gap-3 pt-2 lg:pt-0 lg:pl-2 lg:border-t-0 flex flex-col lg:gap-0 lg:items-center lg:flex-row">
-
-
-                                <li class="flex w-full lg:max-w-max justify-center">
-                                    <a href="{{ route('user-login-index') }}"
-                                        class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
-                                        <span
-                                            class="block text-sm text-white text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
-                                            Sign In
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
+                                    <li class="flex w-full lg:max-w-max justify-center">
+                                        <a href="{{ route('user-login-index') }}"
+                                            class="flex w-full py-3 btn px-6 rounded-lg text-center transition bg-purple-600 lg:bg-white active:bg-purple-700 lg:active:bg-purple-200 focus:bg-purple-500 lg:focus:bg-purple-100 justify-center max-w-lg lg:max-w-max">
+                                            <span
+                                                class="block text-sm text-black text-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-sky-600 via-cyan-600 to-fuchsia-700 font-semibold">
+                                                Sign In
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             @endif
                         </div>
                     </div>
@@ -110,7 +110,9 @@
 
 </html>
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
     window.addEventListener('scroll', e => {
         const header = document.querySelector('#header_')
@@ -138,4 +140,36 @@
         navbar.style.paddingTop = '0px'
         navbar.style.paddingBottom = '0px'
     })
+
+    @if (Session::has('message'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('message') }}");
+    @endif
+
+    @if (Session::has('error'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.error("{{ session('error') }}");
+    @endif
+
+    @if (Session::has('info'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.info("{{ session('info') }}");
+    @endif
+
+    @if (Session::has('warning'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.warning("{{ session('warning') }}");
+    @endif
 </script>

@@ -108,11 +108,11 @@
 
             {{-- Cards -2 --}}
             <div class="col-span-12 mt-8">
-                @if (count($cardInfo['goals']) > 0 && count($cardInfo['entryData']) > 0)
+                @if (count($cardInfo['goals']) > 0 && $cardInfo['entryCount'] > 0)
                     <div class="intro-y flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5 ml-6">
+                        {{-- <h2 class="text-lg font-medium truncate mr-5 ml-6">
                             General Report
-                        </h2>
+                        </h2> --}}
                         {{-- <span href="" class="ml-auto flex items-center text-primary"> --}}
                         {{-- </span> --}}
                     </div>
@@ -126,17 +126,22 @@
                                     @php
                                         $entryCalls = 0;
                                         $fupCalls = 0;
-                                        if (isset($cardInfo['entryData'][$key]['total_calls'])) {
-                                            $entryCalls = $cardInfo['entryData'][$key]['total_calls'];
+                                        // dd($goalList['entryData']);
+                                        // dd($cardInfo['goals']['entryData']);
+                                        // if ($key == 1) {
+                                        //     dd($goalList['entryData'][0]);
+                                        // }
+                                        if (isset($goalList['entryData'][0]['total_calls'])) {
+                                            $entryCalls = $goalList['entryData'][0]['total_calls'];
                                         }
                                         
-                                        if (isset($cardInfo['fupEntryData'][$key]['total_calls'])) {
-                                            $fupCalls = $cardInfo['fupEntryData'][$key]['total_calls'];
+                                        if (isset($goalList['fupEntryData'][0]['total_calls'])) {
+                                            $fupCalls = $goalList['fupEntryData'][0]['total_calls'];
                                         }
                                         
                                     @endphp
                                     @if ($key == 0)
-                                        <li class="z-30 flex-auto text-center goal-Tab"
+                                        <li class="z-30 flex-auto text-center goal-Tab text-lg"
                                             onclick="displaySelectedGauge({{ $key }},{{ $goalList->id }},{{ $entryCalls }},{{ $goalList->calls }},{{ $fupCalls }},{{ $goalList->calls }})">
                                             <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
                                                 data-tab-target="" active="" role="tab" aria-selected="true"
@@ -146,7 +151,7 @@
                                         </li>
                                     @else
                                         @if (isset($cardInfo['fupEntryData'][$key]['total_calls']))
-                                            <li class="z-30 flex-auto text-center goal-Tab"
+                                            <li class="z-30 flex-auto text-center goal-Tab text-lg"
                                                 onclick="displaySelectedGauge({{ $key }},{{ $goalList->id }},{{ $entryCalls }},{{ $goalList->calls }},{{ $fupCalls }},{{ $goalList->calls }})">
                                                 <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
                                                     data-tab-target="" active="" role="tab" aria-selected="false"
@@ -155,7 +160,7 @@
                                                 </a>
                                             </li>
                                         @else
-                                            <li class="z-30 flex-auto text-center goal-Tab"
+                                            <li class="z-30 flex-auto text-center goal-Tab text-lg"
                                                 onclick="displaySelectedGauge({{ $key }},{{ $goalList->id }},{{ $entryCalls }},{{ $goalList->calls }},{{ $fupCalls }},{{ $goalList->calls }})">
                                                 <a class="text-slate-700 p-2 z-30 mb-0 flex w-full items-center justify-center rounded-lg border-0 bg-inherit transition-all ease-in-out"
                                                     data-tab-target="" active="" role="tab" aria-selected="false"
@@ -175,7 +180,7 @@
                                             id="g{{ $goal->id }}" role="tabpanel">
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">Daily Organizations Attempted
                                                 </span>
                                                 <div class="w-full z-50" style="margin-top:20px">
@@ -188,7 +193,7 @@
                                                 <div class="side-nav__devider my-6"></div>
                                                 <hr>
                                                 {{-- Calls Attempts Chart --}}
-                                                <span class="block mx-auto mt-4 font-bold text-start p-2"
+                                                <span class="block mx-auto mt-4 font-bold text-center p-2"
                                                     style="font-size: 20px">Daily
                                                     Call Attempts
                                                 </span>
@@ -222,29 +227,25 @@
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-8 intro-y box p-5 zoom-in z-0">
                                                 {{-- <div class="report-box "> --}}
-                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
-                                                    style="font-size: 20px">Calls
-                                                    Countdown
-                                                </span>
-                                                <div class="w-full gauge-container">
-                                                    <canvas class="callsgauge justify-center"
-                                                        id="calls-gauge{{ $goal->id }}"
-                                                        style=" display: block;
-                                                            margin: 0 auto;"></canvas>
-                                                    <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
-                                                </div>
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
-                                                    style="font-size: 20px">FUP
-                                                    Calls Countdown
-                                                </span>
+
                                                 <div class="w-full">
-                                                    <canvas class="justify-center"
+                                                    <canvas class="dd justify-center" id="calls-gauge{{ $goal->id }}"
+                                                        style=" display: block;
+                                                            margin: 0 auto; width:95%;margin-top:50px"
+                                                        height=386></canvas>
+                                                    <div id="preview-textfield"></div>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2"
+                                                        style="font-size: 30px">NAP</span>
+                                                </div>
+
+                                                <div class="w-full mt-16">
+                                                    <canvas class="dd justify-center"
                                                         id="fup-calls-gauge{{ $goal->id }}"
                                                         style=" display: block;
                                                         margin: 0 auto; width:95%;margin-top:50px"></canvas>
                                                     <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2"
+                                                        style="font-size: 30px">FUP</span>
                                                 </div>
                                             </div>
                                             {{-- NAP GAUGE 2 END --}}
@@ -300,14 +301,14 @@
                                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
 
 
-                                                        @if (isset($cardInfo['entryData'][$index1]))
+                                                        @if (isset($goal['entryData'][0]))
                                                             <div
                                                                 class="w-full rounded-lg text-xs font-medium text-blue-100 text-center leading-none">
                                                                 <div class="text-xs leading-none py-1 text-center text-white"
-                                                                    style="width: {{ ($cardInfo['entryData'][$index1]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
+                                                                    style="width: {{ ($goal['entryData'][0]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
                                                                     <span class="mb-2"
                                                                         style="z-index: 10;position:absolute;display:block">
-                                                                        {{ $cardInfo['entryData'][$index1]->total_organizations_reached }}
+                                                                        {{ $goal['entryData'][0]->total_organizations_reached }}
                                                                         Organizations Reached
                                                                     </span>
                                                                 </div>
@@ -343,20 +344,20 @@
                                                                     </span>
                                                                 </div>
                                                                 {{-- PITCHES --}}
-                                                                @if (isset($cardInfo['entryData'][$index1]))
+                                                                @if (isset($goal['entryData'][0]))
                                                                     <div class="text-2xl font-medium leading-8 mt-6">
                                                                         <div class="flex">
                                                                             <span class="m-1 p-2"><i
                                                                                     data-feather="briefcase"
                                                                                     class="report-box__icon text-primary"></i>
                                                                             </span>
-                                                                            @if ($goal->organizations_reached >= $cardInfo['entryData'][$index1]->total_organizations_reached)
+                                                                            @if ($goal->organizations_reached >= $goal['entryData'][0]->total_organizations_reached)
                                                                                 <span class="m-1 p-2">
-                                                                                    {{ $goal->organizations_reached - $cardInfo['entryData'][$index1]->total_organizations_reached }}
+                                                                                    {{ $goal->organizations_reached - $goal['entryData'][0]->total_organizations_reached }}
                                                                                     Organizations to be Reached
                                                                                     !
                                                                                     <span
-                                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index1]->total_organizations_reached }}
+                                                                                        class="text-base text-slate-500">({{ $goal['entryData'][0]->total_organizations_reached }}
                                                                                         Made)
                                                                                     </span>
                                                                                 </span>
@@ -390,26 +391,26 @@
                                                                 @endif
                                                                 {{-- PITCHES END --}}
                                                                 {{-- CALLS --}}
-                                                                @if (isset($cardInfo['entryData'][$index1]))
+                                                                @if (isset($goal['entryData'][0]))
                                                                     <div class="text-2xl font-medium leading-8 mt-6">
                                                                         <div class="flex">
                                                                             <span class="m-1 p-2">
                                                                                 <i data-feather="phone-call"
                                                                                     class="report-box__icon text-primary"></i>
                                                                             </span>
-                                                                            @if ($goal->calls >= $cardInfo['entryData'][$index1]->total_calls)
+                                                                            @if ($goal->calls >= $goal['entryData'][0]->total_calls)
                                                                                 <span class="m-1 p-2">
-                                                                                    {{ $goal->calls - $cardInfo['entryData'][$index1]->total_calls }}
+                                                                                    {{ $goal->calls -$goal['entryData'][0]->total_calls }}
                                                                                     Calls to
                                                                                     Go! <span
-                                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index1]->total_calls }}
+                                                                                        class="text-base text-slate-500">({{ $goal['entryData'][0]->total_calls }}
                                                                                         Made)</span>
                                                                                 </span>
                                                                             @else
                                                                                 <span class="m-1 p-2">
                                                                                     0 left
                                                                                     <span
-                                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index1]->total_calls }}
+                                                                                        class="text-base text-slate-500">({{$goal['entryData'][0]->total_calls }}
                                                                                         Made)</span>
                                                                                 </span>
                                                                             @endif
@@ -446,7 +447,7 @@
                                             id="g{{ $goal->id }}" role="tabpanel">
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-4 intro-y box p-5 zoom-in z-0">
-                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">Organization Accomplishments Report
                                                 </span>
                                                 <div class="w-full z-50" style="margin-top:20px">
@@ -458,7 +459,7 @@
                                                 </div>
                                                 <div class="side-nav__devider my-6"></div>
                                                 <hr>
-                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">Daily
                                                     Calls Graph
                                                 </span>
@@ -471,7 +472,7 @@
                                                 </div>
                                                 <div class="side-nav__devider my-6"></div>
                                                 <hr>
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">Daily
                                                     Pitch
                                                     Progress
@@ -490,28 +491,30 @@
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-8 intro-y box p-5 zoom-in z-0">
                                                 {{-- <div class="report-box "> --}}
-                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                                {{-- <span class="block mx-auto mt-2 font-bold text-start p-2"
                                                     style="font-size: 20px">Calls
                                                     Countdown
-                                                </span>
+                                                </span> --}}
                                                 <div class="w-full" style="margin-top:50px">
-                                                    <canvas class="justify-center callsgauge"
+                                                    <canvas class="dd justify-center  "
                                                         id="calls-gauge{{ $goal->id }}"
                                                         style=" display: block;
-                                                            margin: 0 auto;margin-top:50px"></canvas>
+                                                            margin: 0 auto; width:95%;margin-top:50px"></canvas>
                                                     <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2"
+                                                        style="font-size: 30px">NAP</span>
                                                 </div>
-                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
+                                                {{-- <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">FUP
                                                     Calls Countdown
-                                                </span>
+                                                </span> --}}
                                                 <div class="w-full">
-                                                    <canvas class="justify-center"
+                                                    <canvas class="dd justify-center"
                                                         id="fup-calls-gauge{{ $goal->id }}"
-                                                        style=" display: block;margin: 0 auto; width:95%;margin-top:50px;height:171px"></canvas>
+                                                        style=" display: block;margin: 0 auto; width:95%;margin-top:50px;"></canvas>
                                                     <div id="preview-textfield"></div>
-                                                    <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
+                                                    <span class="block mx-auto m-2 font-medium text-center p-2"
+                                                        style="font-size: 30px">FUP</span>
                                                 </div>
                                             </div>
                                             {{-- NAP GAUGE 2 END --}}
@@ -568,15 +571,15 @@
                                                     <div class="w-full bg-indigo rounded-lg mt-4"
                                                         style="background:linear-gradient(18deg, rgba(230,230,230,1) 0%, rgba(217,217,217,1) 100%);">
 
-
-                                                        @if (isset($cardInfo['entryData'][$index1]))
+                                                        {{-- @dd($cardInfo['goals'][$goalIndex]['entryData']); --}}
+                                                        @if (isset($goal['entryData'][0]))
                                                             <div
                                                                 class="w-full rounded-lg text-xs font-medium text-blue-100 text-center leading-none">
                                                                 <div class="text-xs leading-none py-1 text-center text-white"
-                                                                    style="width: {{ ($cardInfo['entryData'][$index1]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
+                                                                    style="width: {{ ($goal['entryData'][0]->total_organizations_reached / $goal->organizations_reached) * 100 }}%;background:linear-gradient(-90deg, rgba(149,210,67,1) 0%, rgba(38,170,58,1) 100%);padding:20px;z-index:2;text-align:center">
                                                                     <span class="mb-2"
                                                                         style="z-index: 10;position:absolute;display:block">
-                                                                        {{ $cardInfo['entryData'][$index1]->total_organizations_reached }}
+                                                                        {{ $goal['entryData'][0]->total_organizations_reached }}
                                                                         Organizations Reached
                                                                     </span>
                                                                 </div>
@@ -626,20 +629,20 @@
                                                                     </span>
                                                                 </div>
                                                                 {{-- PITCHES --}}
-                                                                @if (isset($cardInfo['entryData'][$index1]))
+                                                                @if (isset($goal['entryData'][0]))
                                                                     <div class="text-2xl font-medium leading-8 mt-6">
                                                                         <div class="flex">
                                                                             <span class="m-1 p-2"><i
                                                                                     data-feather="briefcase"
                                                                                     class="report-box__icon text-primary"></i>
                                                                             </span>
-                                                                            @if ($goal->organizations_reached >= $cardInfo['entryData'][$index1]->total_organizations_reached)
+                                                                            @if ($goal->organizations_reached >= $goal['entryData'][0]->total_organizations_reached)
                                                                                 <span class="m-1 p-2">
-                                                                                    {{ $goal->organizations_reached - $cardInfo['entryData'][$index1]->total_organizations_reached }}
+                                                                                    {{ $goal->organizations_reached - $goal['entryData'][0]->total_organizations_reached }}
                                                                                     Organizations to be Reached
                                                                                     !
                                                                                     <span
-                                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index1]->total_organizations_reached }}
+                                                                                        class="text-base text-slate-500">({{ $goal['entryData'][0]->total_organizations_reached }}
                                                                                         Made)
                                                                                     </span>
                                                                                 </span>
@@ -673,26 +676,26 @@
                                                                 @endif
                                                                 {{-- PITCHES END --}}
                                                                 {{-- CALLS --}}
-                                                                @if (isset($cardInfo['entryData'][$index1]))
+                                                                @if (isset($goal['entryData'][0]))
                                                                     <div class="text-2xl font-medium leading-8 mt-6">
                                                                         <div class="flex">
                                                                             <span class="m-1 p-2">
                                                                                 <i data-feather="phone-call"
                                                                                     class="report-box__icon text-primary"></i>
                                                                             </span>
-                                                                            @if ($goal->calls >= $cardInfo['entryData'][$index1]->total_calls)
+                                                                            @if ($goal->calls >= $goal['entryData'][0]->total_calls)
                                                                                 <span class="m-1 p-2">
-                                                                                    {{ $goal->calls - $cardInfo['entryData'][$index1]->total_calls }}
+                                                                                    {{ $goal->calls - $goal['entryData'][0]->total_calls }}
                                                                                     Calls to
                                                                                     Go! <span
-                                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index1]->total_calls }}
+                                                                                        class="text-base text-slate-500">({{ $goal['entryData'][0]->total_calls }}
                                                                                         Made)</span>
                                                                                 </span>
                                                                             @else
                                                                                 <span class="m-1 p-2">
                                                                                     0 left
                                                                                     <span
-                                                                                        class="text-base text-slate-500">({{ $cardInfo['entryData'][$index1]->total_calls }}
+                                                                                        class="text-base text-slate-500">({{ $goal['entryData'][0]->total_calls }}
                                                                                         Made)</span>
                                                                                 </span>
                                                                             @endif
@@ -741,12 +744,15 @@
                                     @php
                                         $entryCalls = 0;
                                         $fupCalls = 0;
-                                        if (isset($cardInfo['entryData'][$key]['total_calls'])) {
-                                            $entryCalls = $cardInfo['entryData'][$key]['total_calls'];
+                                        // if($key==1){
+                                        // dd($goal[$goalIndex]['entryData'][$key]['total_calls']);
+                                        // }
+                                        if (isset($goalList['entryData'][0]['total_calls'])) {
+                                            $entryCalls = $goalList['entryData'][0]['total_calls'];
                                         }
                                         
-                                        if (isset($cardInfo['fupEntryData'][$key]['total_calls'])) {
-                                            $fupCalls = $cardInfo['fupEntryData'][$key]['total_calls'];
+                                        if (isset($goalList['fupEntryData'][0]['total_calls'])) {
+                                            $fupCalls = $goalList['fupEntryData'][0]['total_calls'];
                                         }
                                         
                                     @endphp
@@ -810,7 +816,7 @@
                                                 {{-- Calls Chart End --}}
                                                 <div class="side-nav__devider my-6"></div>
                                                 <hr>
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">Daily
                                                     Pitch
                                                     Progress
@@ -827,24 +833,24 @@
                                             {{-- Calls Countdown Gauge --}}
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-8 intro-y box p-5 zoom-in z-0">
-                                                <span class="block mx-auto mt-2 font-bold text-start p-2"
+                                                {{-- <span class="block mx-auto mt-2 font-bold text-start p-2"
                                                     style="font-size: 20px">Calls
                                                     Countdown
-                                                </span>
+                                                </span> --}}
                                                 <div class="w-full" style="margin-top:50px">
-                                                    <canvas class="justify-center callsgauge"
+                                                    <canvas class="dd justify-center  "
                                                         id="calls-gauge{{ $goal->id }}"
                                                         style=" display: block;
-                                                margin: 0 auto;margin-top:50px"></canvas>
+                                                margin: 0 auto ;width:95%;margin-top:50px"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
                                                 </div>
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
+                                                {{-- <span class="block mx-auto mt-2 font-bold text-left p-2"
                                                     style="font-size: 20px">FUP
                                                     Calls Countdown
-                                                </span>
+                                                </span> --}}
                                                 <div class="w-full">
-                                                    <canvas class="justify-center"
+                                                    <canvas class="dd justify-center"
                                                         id="fup-calls-gauge{{ $goal->id }}"
                                                         style=" display: block;margin: 0 auto; width:95%;margin-top:50px"></canvas>
                                                     <div id="preview-textfield"></div>
@@ -930,7 +936,7 @@
                                                         <div style="z-index: 9999 !important" class="w-3/5 ">
                                                             <div class="">
                                                                 <div style="z-index: 9999 !important" class="ml-2 flex ">
-                                                                    <i data-feather="target" --}}
+                                                                    <i data-feather="target"
                                                                         class="report-box__icon text-primary"></i>
                                                                     <span class="m-1 p-2">
                                                                         {{ $goal->name }}
@@ -1012,7 +1018,7 @@
                                                 {{-- Calls Chart End --}}
                                                 <div class="side-nav__devider my-6"></div>
                                                 <hr>
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
+                                                <span class="block mx-auto mt-2 font-bold text-center p-2"
                                                     style="font-size: 20px">Daily
                                                     Pitch
                                                     Progress
@@ -1029,26 +1035,20 @@
                                             {{-- Calls Countdown Gauge --}}
                                             <div
                                                 class="col-span-12 sm:col-span-12 xl:col-span-8 intro-y box p-5 zoom-in z-0">
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
-                                                    style="font-size: 20px">Calls Countdown
-                                                </span>
+
                                                 <div class="w-full" style="margin-top:50px">
-                                                    <canvas class="justify-center callsgauge"
+                                                    <canvas class="dd justify-center  "
                                                         id="calls-gauge{{ $goal->id }}"
                                                         style=" display: block;
                                                 margin: 0 auto;margin-top:50px"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">NAP</span>
                                                 </div>
-                                                <span class="block mx-auto mt-2 font-bold text-left p-2"
-                                                    style="font-size: 20px">FUP
-                                                    Calls Countdown
-                                                </span>
+
                                                 <div class="w-full">
-                                                    <canvas class="justify-center"
+                                                    <canvas class="dd justify-center"
                                                         id="fup-calls-gauge{{ $goal->id }}"
-                                                        style=" display: block;
-                                        margin: 0 auto; width:95%;margin-top:50px;height:171px"></canvas>
+                                                        style=" display: block; margin: 0 auto; width:95%;margin-top:50px;"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2">FUP</span>
                                                 </div>
@@ -1135,7 +1135,7 @@
                                                         <div style="z-index: 9999 !important" class="w-3/5 ">
                                                             <div class="">
                                                                 <div style="z-index: 9999 !important" class="ml-2 flex ">
-                                                                    <i data-feather="target" --}}
+                                                                    <i data-feather="target"
                                                                         class="report-box__icon text-primary"></i>
                                                                     <span class="m-1 p-2">
                                                                         {{ $goal->name }}
@@ -1232,6 +1232,10 @@
             width: 100%;
             /* background-color: #c9c9c9; */
             position: relative;
+        }
+
+        .dd {
+            height: 386px;
         }
     </style>
 @endsection

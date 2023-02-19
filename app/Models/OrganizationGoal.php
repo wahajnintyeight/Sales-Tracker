@@ -21,7 +21,7 @@ class OrganizationGoal extends Model
     ];
     public function entries()
     {
-        return $this->hasMany(OrganizationEntry::class);
+        return $this->hasMany(OrganizationEntry::class,'organization_goal_id');
     }
 
     public function kpi()

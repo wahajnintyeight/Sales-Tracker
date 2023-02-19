@@ -239,9 +239,9 @@ if (goalsOnly == true) {
             gauge.setMinValue(0); // Prefer setter over gauge.minValue = 0
             gauge.animationSpeed = 32; // set animation speed (32 is default value)
             console.log("gauge>", gauge.canvas.outerHTML);
-
+            console.log("calls>",calls[index].entryData.total_calls)
             // console.log("calls>", calls[index]);
-            if (typeof calls[index] !== "undefined") {
+            if (typeof calls[index].entryData.total_calls !== "undefined") {
                 gauge.set(calls[index].total_calls); // set actual value
             } else {
                 gauge.set(0); // set actual value

@@ -44,6 +44,7 @@ if (goalsOnly == true) {
         if (callsDates[index].length <= 1) {
             callsDates[index] = ["0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0", "0-0"]
         }
+        console.log("org reached",orgRchEachDay[index])
         new Chart(ctx, {
             type: 'line',
             data: {
