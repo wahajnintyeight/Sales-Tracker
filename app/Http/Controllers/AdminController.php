@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KPI;
+use App\Models\OrganizationEntry;
 use App\Models\OrganizationGoal;
 use App\Models\Team;
 use App\Models\User;
@@ -14,7 +15,20 @@ class AdminController extends Controller
 {
     public function viewHome()
     {
-        return view('admin.dashboard.index');
+        $mostCallsUser = OrganizationEntry::with('user')
+            ->select('user_id', DB::raw('SUM(calls) as total_calls'))
+            ->groupBy('user_id')
+            ->orderByDesc('total_calls')
+            ->first();
+        $mostOrgReached = OrganizationEntry::with('user')
+            ->select('user_id', DB::raw('SUM(organizations_reached) as org_reached'))
+            ->groupBy('user_id')
+            ->orderByDesc('org_reached')
+            ->first();
+        // dd($mostOrgReached);
+        $fullName = $mostCallsUser->user->name;
+        // dd($mostCallsUser);
+        return view('admin.dashboard.index', compact('fullName', 'mostOrgReached'));
     }
     public function viewUsers()
     {

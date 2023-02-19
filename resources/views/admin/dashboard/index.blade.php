@@ -5,7 +5,7 @@
         @include('admin.dashboard.layouts.topbar')
         <!-- END: Top Bar -->
         <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-12 2xl:col-span-9">
+            <div class="col-span-12 2xl:col-span-12 lg:col-span-12">
                 {{-- <div class="grid grid-cols-12 gap-6">
                     <!-- BEGIN: General Report -->
                     <div class="col-span-12 mt-8">
@@ -363,7 +363,71 @@
                     <!-- END: Weekly Top Products -->
                 </div> --}}
                 <div class="container m-6 p-6">
-                    <h2 class="w-full h-full p-4 m-6 block text-black font-bold">No Data for Admin at the moment.</h2>
+                    <div class="grid grid-cols-12 gap-3 mt-5">
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-feather="target" class="report-box__icon text-primary"></i>
+                                        <span class="m-1 p-2">
+                                            Welcome!
+                                        </span>
+                                    </div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">Admin</div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Most Calls --}}
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-feather="target" class="report-box__icon text-primary"></i>
+                                        <span class="m-1 p-2">
+                                            Most Calls by
+                                        </span>
+                                    </div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">{{ $fullName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Most Calls End --}}
+                        {{-- Most Org Reached --}}
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-feather="target" class="report-box__icon text-primary"></i>
+                                        <span class="m-1 p-2">
+                                            Most Organizations Reached by
+                                        </span>
+                                    </div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">{{ $mostOrgReached->user->name }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Most Org Reached End --}}
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <i data-feather="clock" class="report-box__icon text-primary"></i>
+                                        <span class="m-1 p-2">
+                                            Current Month
+                                        </span>
+
+                                    </div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">
+                                        {{ Carbon\Carbon::now()->format('F') }}
+                                    </div>
+                                    <div class="text-base text-slate-500 mt-1">
+                                        {{ Carbon\Carbon::now()->format('Y') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             {{-- <div class="col-span-12 2xl:col-span-3">
