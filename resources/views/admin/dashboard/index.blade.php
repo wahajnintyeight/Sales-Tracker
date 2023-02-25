@@ -368,7 +368,7 @@
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-                                        <i data-feather="target" class="report-box__icon text-primary"></i>
+                                        <i data-feather="alert-circle" class="report-box__icon text-primary"></i>
                                         <span class="m-1 p-2">
                                             Welcome!
                                         </span>
@@ -378,11 +378,11 @@
                             </div>
                         </div>
                         {{-- Most Calls --}}
-                        <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-                                        <i data-feather="target" class="report-box__icon text-primary"></i>
+                                        <i data-feather="phone" class="report-box__icon text-primary"></i>
                                         <span class="m-1 p-2">
                                             Most Calls by
                                         </span>
@@ -393,11 +393,11 @@
                         </div>
                         {{-- Most Calls End --}}
                         {{-- Most Org Reached --}}
-                        <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-                                        <i data-feather="target" class="report-box__icon text-primary"></i>
+                                        <i data-feather="activity" class="report-box__icon text-primary"></i>
                                         <span class="m-1 p-2">
                                             Most Organizations Reached by
                                         </span>
@@ -407,7 +407,7 @@
                             </div>
                         </div>
                         {{-- Most Org Reached End --}}
-                        <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
@@ -427,7 +427,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             {{-- <div class="col-span-12 2xl:col-span-3">

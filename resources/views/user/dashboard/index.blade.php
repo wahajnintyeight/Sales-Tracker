@@ -400,7 +400,7 @@
                                                                             </span>
                                                                             @if ($goal->calls >= $goal['entryData'][0]->total_calls)
                                                                                 <span class="m-1 p-2">
-                                                                                    {{ $goal->calls -$goal['entryData'][0]->total_calls }}
+                                                                                    {{ $goal->calls - $goal['entryData'][0]->total_calls }}
                                                                                     Calls to
                                                                                     Go! <span
                                                                                         class="text-base text-slate-500">({{ $goal['entryData'][0]->total_calls }}
@@ -410,7 +410,7 @@
                                                                                 <span class="m-1 p-2">
                                                                                     0 left
                                                                                     <span
-                                                                                        class="text-base text-slate-500">({{$goal['entryData'][0]->total_calls }}
+                                                                                        class="text-base text-slate-500">({{ $goal['entryData'][0]->total_calls }}
                                                                                         Made)</span>
                                                                                 </span>
                                                                             @endif
@@ -1234,8 +1234,18 @@
             position: relative;
         }
 
+
+
         .dd {
             height: 386px;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            /* Styles for screens less than 600px wide */
+            .dd {
+                height: 146px;
+            }
         }
     </style>
 @endsection
