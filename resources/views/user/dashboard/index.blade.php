@@ -231,8 +231,7 @@
                                                 <div class="w-full">
                                                     <canvas class="dd justify-center" id="calls-gauge{{ $goal->id }}"
                                                         style=" display: block;
-                                                            margin: 0 auto; width:95%;margin-top:50px"
-                                                        height=386></canvas>
+                                                            margin: 0 auto; width:95%;margin-top:50px"></canvas>
                                                     <div id="preview-textfield"></div>
                                                     <span class="block mx-auto m-2 font-medium text-center p-2"
                                                         style="font-size: 30px">NAP</span>
@@ -1236,16 +1235,14 @@
 
 
 
-        .dd {
-            height: 386px;
-        }
+        
 
-        @media only screen and (max-width: 600px) {
+        /* @media only screen and (max-width: 600px) {
 
-            /* Styles for screens less than 600px wide */
-            .dd {
-                height: 146px;
-            }
-        }
+                /* Styles for screens less than 600px wide */
+        /* .dd { */
+        /* height: 146px; */
+        /* } */
+        /* }  */
     </style>
 @endsection

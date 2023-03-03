@@ -220,7 +220,22 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="{{ asset('dashboard-dist/dist/js/daily-appointments-fixed-chart.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/daily-average-organizations-gauge.js') }}"></script>
     <script src="{{ asset('dashboard-dist/dist/js/calls-gauge.js') }}"></script>
+    <script>
+        function applyMediaQuery() {
+            if (window.innerWidth < 600) {
+                console.log("I run")
+                // apply styles for screens less than 600px wide
+                document.getElementsByClassName('dd').style.height = '150px';
+            } else {
+                // reset styles for screens wider than 600px
+                document.getElementsByClassName('dd').style.height = 'auto';
+            }
+        }
 
+        // call the function on page load and on window resize
+        window.onload = applyMediaQuery;
+        window.onresize = applyMediaQuery;
+    </script>
 
 </body>
 

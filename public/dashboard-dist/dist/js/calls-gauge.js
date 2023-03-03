@@ -231,8 +231,8 @@ if (goalsOnly == true) {
 
             var target = document.getElementById('calls-gauge' + goalsIDs[index]); // your canvas element
             // console.log("target", target);
-            target.width = 200;
-            target.height = 300;
+            // target.width = 200;
+            // target.height = 300;
 
             var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
             gauge.maxValue = goalCalls; // set max gauge value
